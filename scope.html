@@ -32,14 +32,37 @@ line.link {
 
 </style>
 <body>
+  <div class="container">
+  <div class="jumbotron">
+    <h2 class="text-center">Classmentors Interactive Scope Model</h2>
+    <p class="text-center">Modules to be completed are represented as nodes in the model</p></div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 class="text-center">Hover Over</h3>
+      <p class="text-center">To show linkage to neighbouring modules</p>
+          </div>
+    <div class="col-sm-4">
+      <h3 class="text-center">Click Once</h3>
+      <p class="text-center">To collapse and expand modules. </p>
+      <p class="text-center">Relative node size is respective to the estimated diffculty of the module, with an additive hierarchy</p>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="text-center">Double Click</h3>
+      <p class="text-center">To view module details</p>
+      
+    </div>
+  </div>
+</div>
+
+
 <script>
-var width = 1300,
-    height = 1100,
+var width = 1150,
+    height = 700,
     root;
 
 var force = d3.layout.force()
-    .linkDistance(80)
-    .charge(-120)
+    .linkDistance(100)
+    .charge(-150)
     .gravity(.05)
     .size([width, height])
     .on("tick", tick);
@@ -60,83 +83,260 @@ var link = svg.selectAll(".link"),
 
 root = {
  "name": "Classmentors",
+ "details": "An interactive web portal for educators to test differring pedagogical approaches within the same classroom and collect data on the effectiveness of various approaches.",
  "children": [
   {
-   "name": "Class Session",
-   "size": 17,
-   "children": [
-      {
-        "name": "Team Creation", 
-        "size": 8, 
-        "details": "Split class into teams, by random or by choice."
-      },
-      {
-        "name": "Automated Partitioning", 
-        "size": 3, 
-        "details": "Perform automated partitioning, which splits the class by pre-allocated teams or by individuals into two or more sets. These sets will experience slightly varied material application over the course of the class session instance."
-      },
-      {
-        "name": "Survey", 
-        "size": 3, 
-        "details": "Allow the content creator to apply surveys to the class pre or post team creation and partitioning. Standardised survey templates are provided while still supporting custum survey creation."
-      },
-      {
-        "name": "Index Cards", 
-        "size": 3, 
-        "details": "System allows individuals to submit questions or topics akin to index cards for review by the lecturer. Submissions are internally curated by the team before submission."
-      },
-      {
-        "name": "Challenges",
-        "size": 45,
-        "children": [
-          {
-            "name": "Jeopardy",
-            "size": 15,
-            "details": "Students participate in a team based questionnaire with twists such as answer wagering and re-guessing."
-          },
-          {
-            "name": "Journalling",
-            "size": 10,
-            "details": "Students are expected to submit a string-like answer for a question posed in the challenge."
-          },
-          {
-            "name": "Code",
-            "size": 20,
-            "details": "Students dynamically upload code to a server-side compiler to solve a given problem. Should this prove infeasible, this functionality will simply permit online code submission."
-          }
-        ],
-        "details": "These are challenges, or events / activities, that the lecturer may administer during the course of the classmentors session."
-      },
-      {
-        "name": "Delete Down Experiment",
-        "size": 10
+    "name": "Primary",
+    "details": "The necessary functions that must be implemented for Classmentors to serve it's purpose. These tasks will hence be executed with the highest level of priority.",
+    "children": [
+        {
+      "name": "Class Session",
+      "details": "Create an instance of a classmentors class session, which includes the features extended as shown.",
+      "children": [
+        {
+          "name": "Administrator",
+          "details": "Functions available to the session creator, usually the lecturer.",
+          "children": [
+            {
+              "name": "Automated Mentor Assignment",
+              "details": "When enabled, performs intra-class assignment between students for stragglers to get help from stronger students who have already completed their assigned exercises.",
+              "size": 6
+            },
+            {
+              "name": "Deleting Down Experiment",
+              "details": "When enabled, this module applies a variation to the activity that the class is assigned, and recursively performs A/B testing-like procedure to discern the \"most effective\" variation of the activity.",
+              "size": 12
+            },
+            {
+              "name": "Team Creation",
+              "details": "Either randomly or based on the contetn creator's input, splits the class into teams for performing activities in the later stages of the class.",
+              "size": 4
+            },
+            {
+              "name": "Automated Partitioning",
+              "details": "This function is performed in tandem with team creation, but can be executed as a stand-alone as well. Well enabled, automatically breaks the class into two main segments to apply subsequent activity variance to.",
+              "size": 5
+            },
+            {
+              "name": "Create Session",
+              "details": "Creates an instance of a Classmentors class session, from which subsequent activities are appended.",
+              "size": 8
+            },
+            {
+              "name": "Create Challenges",
+              "details": "The content creator is able to create challenges for the class to participate in.",
+              "children": [
+                {
+                  "name": "Content Upload",
+                  "details": "Allows upload of various rich media, from documents to links and videos.",
+                  "size": 4
+                },
+                {
+                  "name": "Content Builder",
+                  "details": "Provides the content creator with various standarised templates from which to build event content for the class to participate in.",
+                  "size": 10
+                }
+              ]
+            },
+            {
+              "name": "Configurable Event Ranking",
+              "details": "",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "name": "Student", 
+          "details": "Challenges, events, and tasks that students in the class may access and participate in.", 
+          "children": [
+            {
+              "name": "Index Card",
+              "details": "",
+              "size": 5
+            },
+            {
+              "name": "Jeopardy",
+              "details": "",
+              "size": 12
+            },
+            {
+              "name": "MCQ",
+              "details": "",
+              "size": 6
+            },
+            {
+              "name": "Journaling",
+              "details": "",
+              "size": 3
+            },
+            {
+              "name": "Code",
+              "details": "",
+              "size": 8
+            }
+        ]
       }
-     ],
-     "details": "Create an instance of a classmentors class session, which includes the features extended as shown."
+     ]
   },
   {
     "name": "Analytics",
+    "details": "Provide statistical and descriptive insight into metrics of the class session",
     "children": [
-
+      {
+        "name": "Report generation",
+        "details": "",
+        "size": 20
+      },
+      {
+        "name": "Completion Statistics",
+        "details": "",
+        "size": 20
+      },
+      {
+        "name": "Raw Data Display",
+        "details": "",
+        "size": 4
+      }
+    ]
+  }
+    ]
+  },
+  {
+    "name": "Secondary",
+    "details": "",
+    "children": [
+      {
+    "name": "Usability",
+    "details": "",
+    "children": [
+      {
+        "name": "Ease of Access",
+        "details": "",
+        "size": 15
+      },
+      {
+        "name": "Automated Field Completion",
+        "details": "",
+        "size": 4
+      }
+    ]
+  },
+  {
+    "name": "Data Visualisation",
+    "details": "",
+    "children": [
+      {
+        "name": "Result Dashboard",
+        "details": "",
+        "size": 20
+      },
+      {
+        "name": "Data Export",
+        "details": "",
+        "size": 6
+      },
+      {
+        "name": "Advanced Charts",
+        "details": "",
+        "size": 15
+      }
+    ]
+  }
+    ]
+  },
+  {
+    "name": "Tertiary",
+    "details": "",
+    "children": [
+      {
+    "name": "Advanced Analytics",
+    "details": "",
+    "children": [
+      {
+        "name": "Aggregated Analytics",
+        "details": "",
+        "size": 15
+      },
+      {
+        "name": "Recommendation System",
+        "details": "",
+        "size": 15
+      }
+    ]
+  },
+  {
+    "name": "Third Party Support",
+    "details": "",
+    "children": [
+      {
+        "name": "FAQ",
+        "details": "",
+        "size": 6
+      },
+      {
+        "name": "Request Submission",
+        "details": "",
+        "size": 6
+      }
+    ]
+  }
     ]
   }
   ]
 };
 
+// console.log(flatten(root));
+var nodes = flatten(root),
+  links = d3.layout.tree().links(nodes);
+
+for(i=0; i<nodes.length; i++) {
+  var task = nodes[i];
+  if(task.children!==undefined) {
+    var size = 0;
+    for (var j = 0; j < task.children.length; j++) {
+      size+=task.children[j].size;
+    };
+    nodes[i].size = size;
+  }
+}
+
+//Toggle stores whether the highlighting is on
+var toggle = 0;
+//Create an array logging what is connected to what
+var linkedByIndex = {};
+for (i = 0; i < nodes.length; i++) {
+    linkedByIndex[i + "," + i] = 1;
+};
+links.forEach(function (d) {
+    linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
+//This function looks up whether a pair are neighbours
+function neighboring(a, b) {
+    return linkedByIndex[a.index + "," + b.index];
+}
+
+// nodes.forEach(function(d) {
+//   d._children = d.children;
+//   d.children = null;
+// });
+
 update();
 
+
 function update() {
-  var nodes = flatten(root),
-      links = d3.layout.tree().links(nodes);
+  nodes = flatten(root);
+  links = d3.layout.tree().links(nodes);
 
   var values = [];
   for(var i=0; i<nodes.length; i++) {
     values.push(nodes[i].size);
   }
-  var largestQty = d3.max(values);
+
+  var largestQty = d3.max(values),
+    smallestQty = d3.min(values);
   var scale = d3.scale.linear()
-        .domain([0, largestQty])
-        .range([5, 30]);
+        .domain([smallestQty, largestQty])
+        .range([10, 50]);
 
   // Restart the force layout.
   force
@@ -159,15 +359,14 @@ function update() {
 
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
-      .on('dblclick', function (d, i) {
-        var popup = new chartpopup();
-        popup.show({Name: d.name, "Estimated Man Hours": d.size, Details: d.details}, d);
-      })
+      .on('dblclick', dblClick)
       .on("click", click)
+      .on("mouseover", connectedNodes)
+      .on("mouseout", connectedNodes)
       .call(force.drag);
 
   nodeEnter.append("circle")
-      .attr("r", function(d) { return scale(d.size) || 10; });
+      .attr("r", function(d) { return scale(d.size); });
 
   nodeEnter.append("text")
       .attr("dy", ".35em")
@@ -192,9 +391,16 @@ function tick() {
 }
 
 function color(d) {
-  return d._children ? "#3182bd" // collapsed package
-      : d.children ? "#c6dbef" // expanded package
-      : "#fd8d3c"; // leaf node
+  // return d._children ? "#3182bd" // collapsed package
+  //     : d.children ? "#c6dbef" // expanded package
+  //     : "#fd8d3c"; // leaf node
+  var color = "#CCFFFF"; //leaf
+  if(d._children) {
+    color = "#66FFCC"; // retracted
+  } else if(d.children) {
+    color = "#FFCCFF"; //expanded
+  }
+  return color;
 }
 
 // Toggle children on click.
@@ -210,6 +416,12 @@ function click(d) {
   update();
 }
 
+function dblClick(d) {
+  if (d3.event.defaultPrevented) return; // ignore drag
+  var popup = new chartpopup();
+  popup.show({Name: d.name, "Estimated Man Hours": d.size, Details: d.details}, d);
+}
+
 // Returns a list of all nodes under the root.
 function flatten(root) {
   var nodes = [], i = 0;
@@ -222,6 +434,30 @@ function flatten(root) {
 
   recurse(root);
   return nodes;
+}
+
+function connectedNodes() {
+    if (toggle == 0) {
+        //Reduce the opacity of all but the neighbouring nodes
+        d = d3.select(this).node().__data__;
+        node.transition()
+    .duration(300).style("opacity", function (o) {
+            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.4;
+        });
+        link.transition()
+    .duration(300).style("opacity", function (o) {
+            return d.index==o.source.index | d.index==o.target.index ? 1 : 0.4;
+        });
+        //Reduce the op
+        toggle = 1;
+    } else {
+        //Put them back to opacity=1
+        node.transition()
+    .duration(300).style("opacity", 1);
+        link.transition()
+    .duration(300).style("opacity", 1);
+        toggle = 0;
+    }
 }
 </script>
 </body>
