@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!-- 
+Author: Lim Shi Quan
+Adapted from Reinhard Engel's Timeline-Proof of Concept. 
+-->
 <html>
 
 <head>
@@ -14,8 +18,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <!-- Store these two files in your application directory or on your path. -->
-    <script src="timeline.js"></script>
-    <link href="timeline.css" rel="stylesheet" type="text/css" />
+    <script src="../render/timeline.js"></script>
+    <link href="../styles/timeline.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -81,7 +85,7 @@
     // Define domElement and sourceFile
     var domElement = "#timeline";
     // var sourceFile = "philosophers.csv";
-    var sourceFile = "timeline.csv";
+    var sourceFile = "../data/timeline.csv";
 
     // Read in the data and construct the timeline
     d3.csv(sourceFile, function(dataset) {
