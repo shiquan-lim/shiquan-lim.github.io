@@ -58,14 +58,15 @@
 }
 
 .interval {
-    fill: #AAFFFF;
+    /*border-radius: 25px;*/
+    fill: #FFF2BB;
     stroke-width: 6;
     cursor : default;
     pointer-events: true;
 }
 
 .instant {
-    fill: #FFAAFF;
+    fill: #ED4848;
     stroke-width: 6;
     cursor : default;
     /*pointer-events: true;*/
@@ -95,15 +96,30 @@
     background-color: #FFFFFF;
 }
 
-.tooltip {
+/*.tooltipz {
     width: auto;
     position: absolute;
     visibility: hidden;
     color : black;
     cursor:default;
     background-color: #FFFFEE;
-    border: 1px solid;
+    border: 1px solid;s
     padding: 4px;
     shape-rendering: crispEdges;
+    pointer-events: none;
+}*/
+
+.tooltipz {
+    position: absolute;  
+    cursor:default;       
+    text-align: center;
+    visibility: hidden;       
+    width: 60px;                    
+    height: 28px;                   
+    padding: 2px;               
+    font: 12px sans-serif;      
+    background: lightsteelblue; 
+    border: 0px;        
+    border-radius: 8px;         
     pointer-events: none;
 }

@@ -45,7 +45,7 @@ function timeline(domElement) {
 
     var tooltip = d3.select("body")
         .append("div")
-        .attr("class", "tooltip")
+        .attr("class", "tooltipz")
         .style("visibility", "visible");
 
     //--------------------------------------------------------------------------
@@ -214,7 +214,22 @@ function timeline(domElement) {
             .enter().append("svg")
             .attr("y", function (d) { return band.yScale(d.track); })
             .attr("height", band.itemHeight)
-            .attr("class", function (d) { return d.instant ? "part instant" : "part interval";});
+            .attr("class", function (d) { return d.instant ? "part instant" : "part interval";})
+            .on("click", click);
+            // .on("mouseover", function(d) {      
+            //     div.transition()        
+            //         .duration(200)      
+            //         .style("opacity", .9);      
+            //     div .html(d.start)  
+            //         .style("left", (d3.event.pageX) + "px")     
+            //         .style("top", (d3.event.pageY - 28) + "px");    
+            //     })
+            // .on("mouseout", function(d) {       
+            //     div.transition()        
+            //         .duration(500)      
+            //         .style("opacity", 0);   
+            // });
+            
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
@@ -292,16 +307,7 @@ function timeline(domElement) {
             .attr("transform", "translate(0," + (band.y + band.h + 1) +  ")")
             .selectAll("#" + bandName + "Labels")
             .data(labelDefs)
-            .enter().append("g")
-            .on("mouseover", function(d) {
-                tooltip.html(d[5])
-                    .style("top", d[7] + "px")
-                    .style("left", d[6] + "px")
-                    .style("visibility", "visible");
-                })
-            .on("mouseout", function(){
-                tooltip.style("visibility", "hidden");
-            });
+            .enter().append("g");
 
         bandLabels.append("rect")
             .attr("class", "bandLabel")
@@ -329,6 +335,12 @@ function timeline(domElement) {
 
         return timeline;
     };
+
+    function click(d) {
+        if (d3.event.defaultPrevented) return; // ignore drag
+        var popup = new chartpopup();
+        popup.show({Event: d.label, Details: d.activities}, d);
+    }
 
     //----------------------------------------------------------------------
     //
