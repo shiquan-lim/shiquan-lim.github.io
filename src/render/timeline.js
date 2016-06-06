@@ -63,13 +63,14 @@ function timeline(domElement) {
         data.items = items;
         var today = new Date();
         var day = {
-            // start: today.getFullYear()+"-"+today.getMonth()+1+"-"+today.getDate(),
-            start: 2016-06-10,
+            start: today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate(),
+            end: "",
             label: "Current date",
-            fill: "#C4DFE6"
+            activities: "",
+            fill: "#90AFC5"
         }
         console.log(items[0]);
-        // items.push(day);
+        items.push(day);
 
         function showItems(n) {
             var count = 0, n = n || 10;
@@ -225,7 +226,6 @@ function timeline(domElement) {
             .attr("height", band.itemHeight)
             .attr("class", function (d) { return d.instant ? "part instant" : "part interval";})
             .on("click", click);
-            
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
@@ -242,7 +242,8 @@ function timeline(domElement) {
         instants.append("circle")
             .attr("cx", band.itemHeight / 2)
             .attr("cy", band.itemHeight / 2)
-            .attr("r", 5);
+            .attr("r", 5)
+            .attr("fill", function (d) { return d.fill; });
         instants.append("text")
             .attr("class", "instantLabel")
             .attr("x", 15)
@@ -289,13 +290,13 @@ function timeline(domElement) {
 
         var labelDefs = [
                 ["start", "bandMinMaxLabel", 0, 4,
-                    function(min, max) { return toYear(min); },
+                    function(min, max) { return (min); }, // top corner labels
                     "Start of the selected interval", band.x + 30, labelTop],
                 ["end", "bandMinMaxLabel", band.w - labelWidth, band.w - 4,
-                    function(min, max) { return toYear(max); },
+                    function(min, max) { return (max); }, // bot corner labels
                     "End of the selected interval", band.x + band.w - 152, labelTop],
                 ["middle", "bandMidLabel", (band.w - labelWidth) / 2, band.w / 2,
-                    function(min, max) { return max.getUTCFullYear() - min.getUTCFullYear(); },
+                    function(min, max) { return Math.round((max - min)/(1000*60*60*24)); }, //centre label
                     "Length of the selected interval", band.x + band.w / 2 - 75, labelTop]
             ];
 
@@ -396,11 +397,13 @@ function timeline(domElement) {
 
         var band = bands[bandName];
 
+        var month_array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
         var axis = d3.svg.axis()
             .scale(band.xScale)
             .orient(orientation || "bottom")
             .tickSize(6, 0)
-            .tickFormat(function (d) { return toYear(d); });
+            .tickFormat(function (d) { return (month_array[d.getMonth()]); }); // Interval naming
 
         var xAxis = chart.append("g")
             .attr("class", "axis")
