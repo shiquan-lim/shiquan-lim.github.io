@@ -21,7 +21,7 @@
 /* timeline band */
 
 .band { /* band background */
-    fill: #FAFAFA;
+    fill: white;
 }
 
 /* labels */
@@ -59,8 +59,8 @@
 
 .interval {
     /*border-radius: 25px;*/
-    fill: #FFF2BB;
-    stroke-width: 6;
+    /*fill: #FFF2BB;
+*/    stroke-width: 6;
     cursor : default;
     pointer-events: true;
 }

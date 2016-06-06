@@ -216,25 +216,13 @@ function timeline(domElement) {
             .attr("height", band.itemHeight)
             .attr("class", function (d) { return d.instant ? "part instant" : "part interval";})
             .on("click", click);
-            // .on("mouseover", function(d) {      
-            //     div.transition()        
-            //         .duration(200)      
-            //         .style("opacity", .9);      
-            //     div .html(d.start)  
-            //         .style("left", (d3.event.pageX) + "px")     
-            //         .style("top", (d3.event.pageY - 28) + "px");    
-            //     })
-            // .on("mouseout", function(d) {       
-            //     div.transition()        
-            //         .duration(500)      
-            //         .style("opacity", 0);   
-            // });
             
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
             .attr("width", "100%")
-            .attr("height", "100%");
+            .attr("height", "100%")
+            .attr("fill", function (d) { return d.fill; });
         intervals.append("text")
             .attr("class", "intervalLabel")
             .attr("x", 1)
