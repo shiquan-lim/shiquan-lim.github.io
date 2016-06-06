@@ -61,6 +61,15 @@ function timeline(domElement) {
             instantOffset = 100 * yearMillis;
 
         data.items = items;
+        var today = new Date();
+        var day = {
+            // start: today.getFullYear()+"-"+today.getMonth()+1+"-"+today.getDate(),
+            start: 2016-06-10,
+            label: "Current date",
+            fill: "#C4DFE6"
+        }
+        console.log(items[0]);
+        // items.push(day);
 
         function showItems(n) {
             var count = 0, n = n || 10;
@@ -220,7 +229,7 @@ function timeline(domElement) {
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
-            .attr("width", "100%")
+            .attr("width", "200%")
             .attr("height", "100%")
             .attr("fill", function (d) { return d.fill; });
         intervals.append("text")
@@ -327,7 +336,7 @@ function timeline(domElement) {
     function click(d) {
         if (d3.event.defaultPrevented) return; // ignore drag
         var popup = new chartpopup();
-        popup.show({Event: d.label, Details: d.activities}, d);
+        popup.show({Event: d.label, Details: d.activities, Start: d.start, End: d.end}, d);
     }
 
     //----------------------------------------------------------------------
@@ -348,9 +357,9 @@ function timeline(domElement) {
         function getHtml(element, d) {
             var html;
             if (element.attr("class") == "interval") {
-                html = d.label + "<br>" + toYear(d.start) + " - " + toYear(d.end);
+                html = d.label + "<br>" + (d.start) + " - " + (d.end);
             } else {
-                html = d.label + "<br>" + toYear(d.start);
+                html = d.label + "<br>" + (d.start);
             }
             return html;
         }
