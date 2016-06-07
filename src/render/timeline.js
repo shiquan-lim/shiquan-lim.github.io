@@ -8,6 +8,9 @@ function timeline(domElement) {
     // chart
     //
 
+     var month_array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+     var day_array = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     // chart geometry
     var margin = {top: 20, right: 20, bottom: 20, left: 20},
         outerWidth = 960,
@@ -290,10 +293,10 @@ function timeline(domElement) {
 
         var labelDefs = [
                 ["start", "bandMinMaxLabel", 0, 4,
-                    function(min, max) { return (min); }, // top corner labels
+                    function(min, max) { return (month_array[min.getMonth()]); }, // top corner labels
                     "Start of the selected interval", band.x + 30, labelTop],
                 ["end", "bandMinMaxLabel", band.w - labelWidth, band.w - 4,
-                    function(min, max) { return (max); }, // bot corner labels
+                    function(min, max) { return (month_array[max.getMonth()]); }, // bot corner labels
                     "End of the selected interval", band.x + band.w - 152, labelTop],
                 ["middle", "bandMidLabel", (band.w - labelWidth) / 2, band.w / 2,
                     function(min, max) { return Math.round((max - min)/(1000*60*60*24)); }, //centre label
@@ -337,7 +340,11 @@ function timeline(domElement) {
     function click(d) {
         if (d3.event.defaultPrevented) return; // ignore drag
         var popup = new chartpopup();
-        popup.show({Event: d.label, Details: d.activities, Start: d.start, End: d.end}, d);
+        popup.show({Event: d.label, Details: d.activities, Start: formatDateDisplay(d.start), End: formatDateDisplay(d.end)}, d);
+    }
+
+    function formatDateDisplay(date) {
+        return day_array[date.getDay()] + ", " + date.getDate() + " " + month_array[date.getMonth()];
     }
 
     //----------------------------------------------------------------------
@@ -357,10 +364,10 @@ function timeline(domElement) {
 
         function getHtml(element, d) {
             var html;
-            if (element.attr("class") == "interval") {
-                html = d.label + "<br>" + (d.start) + " - " + (d.end);
+            if (element.attr("class") === "part interval") {
+                html = d.label + "<br>" + (formatDateDisplay(d.start)) + " - <br>" + (formatDateDisplay(d.end));
             } else {
-                html = d.label + "<br>" + (d.start);
+                html = d.label + "<br>" + (formatDateDisplay(d.start));
             }
             return html;
         }
@@ -397,13 +404,11 @@ function timeline(domElement) {
 
         var band = bands[bandName];
 
-        var month_array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
         var axis = d3.svg.axis()
             .scale(band.xScale)
             .orient(orientation || "bottom")
             .tickSize(6, 0)
-            .tickFormat(function (d) { return (month_array[d.getMonth()]); }); // Interval naming
+            .tickFormat(function (d) { return (month_array[d.getMonth()]+" "+d.getDate()); }); // Interval naming
 
         var xAxis = chart.append("g")
             .attr("class", "axis")

@@ -102,7 +102,7 @@
     visibility: hidden;
     color : black;
     cursor:default;
-    background-color: #FFFFEE;
+    background-color: lightsteelblue;
     border: 1px solid;s
     padding: 4px;
     shape-rendering: crispEdges;
@@ -114,12 +114,13 @@
     cursor:default;       
     text-align: center;
     visibility: hidden;       
-    width: 60px;                    
-    height: 28px;                   
+    width: auto;                    
+    height: auto;                   
     padding: 2px;               
     font: 12px sans-serif;      
     background: lightsteelblue; 
     border: 0px;        
     border-radius: 8px;         
     pointer-events: none;
+    shape-rendering: crispEdges;
 }
