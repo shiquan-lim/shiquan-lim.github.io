@@ -67,7 +67,7 @@ function timeline(domElement) {
             end: "",
             label: "Current date",
             activities: "",
-            fill: "#90AFC5"
+            fill: "#0040ff"
         }
         console.log(items[0]);
         items.push(day);
