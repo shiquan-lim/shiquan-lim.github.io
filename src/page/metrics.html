@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Metrics for Marksmen IS480 project</title>
+    <!-- load c3 and d3 from local paths -->
+    <link href="../lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../styles/chartpopup.js"></script>
+    <script src="../lib/c3-0.4.11/c3.min.js"></script>
+    <script src="../render/metrics.js"></script>
+    <script src="../styles/chartpopup.js"></script>
+  	<script src="../lib/jquery-2.2.3.js"></script>
+  	<script src="../styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+  	<script src="../styles/bootbox.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../styles/bootstrap-3.3.6-dist/css/bootstrap.css">
+  	<link rel="stylesheet" class="button" href="../styles/button.css"/>
+</head>
+
+<body>
+<script type="text/javascript" src="../lib/angular.min.js"></script>
+<div class="container">
+  <div class="jumbotron">
+    <img class="img-responsive center-block" src="../images/marksmen-logo.png"></br>
+    <h2 class="text-center">Marksmen Project Metrics</h2>
+    <p class="text-center">Select the metric to view and the sprint period</p>
+  </div>
+  <!-- <div class="row">
+    <div class="col-sm-6">
+      <h3 class="text-center">Drag</h3>
+      <p class="text-center">To select a period of time from the lower navigation bar</p>
+      <p class="text-center">This selection can then be dragged again along the timeline. It is expandable and retractable</p>
+          </div>
+    <div class="col-sm-6">
+      <h3 class="text-center">Click</h3>
+      <p class="text-center">To view event details</p>
+      <p class="text-center">Sprint events include detailed information on non-module related activity that was conducted. Point events include information of meeting summaries.</p>
+    </div>
+  </div> -->
+<label for="metric">Select metric to view:</label>
+<select id="metric" class="form-control">
+  <option value="schedule">Schedule</option>
+  <option value="bug">Bug</option>
+  <option value="workload">Workload</option>
+  <option value="interesting">Interesting</option>
+</select>
+<label for="period">Select period:</label>
+<select id="period" class="form-control">
+  <option value="schedule">All</option>
+  <option value="bug">Sprint 1</option>
+  <option value="workload">Sprint 2</option>
+  <option value="interesting">Sprint 3</option>
+</select>
+<div align="left"><input type="submit" class="button" value="Submit" onclick="captureInput()"/></div>
+</div>
+</br>
+<div id="chart" align="center"></div>
+<script>
+	// generateChart('pie');
+
+	function captureInput(){
+        var metric = document.getElementById('metric').value;
+        var period = document.getElementById('period').value;
+        //The alerts are just to test that the textarea input was entered correctly, as it sometimes behaves oddly
+        //alert(dataString);
+
+        //Convert input strings to JSON objects
+        // var metric = format(metric);
+        // var period = format(period);
+
+        // alert(dataObject);
+        chart=generateChart(metric, period);
+    }
+</script>
+
+</body>
+</html>
