@@ -14,7 +14,7 @@ function timeline(domElement) {
     // chart geometry
     var margin = {top: 20, right: 20, bottom: 20, left: 20},
         outerWidth = 960,
-        outerHeight = 500,
+        outerHeight = 600,
         width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
 
@@ -49,7 +49,82 @@ function timeline(domElement) {
     var tooltip = d3.select("body")
         .append("div")
         .attr("class", "tooltipz")
-        .style("visibility", "visible");
+        .style("visibility", "hidden");
+
+    svg.append("text").attr({
+        // fill: "lightgray",
+        x: 10,
+        y: 100,
+    })
+    .text("Legend");
+
+    svg.append("rect").attr({
+        fill: "lightgray",
+        height: 15,
+        width: 50,
+        x: 10,
+        y: 110
+    });
+    svg.append("text").attr({
+        x: 15,
+        y: 121,
+        "font-size": 10,
+        fill: "gray"
+    }).text("Planning");
+
+    svg.append("rect").attr({
+        fill: "#F3DADA",
+        height: 15,
+        width: 50,
+        x: 10,
+        y: 130
+    });
+    svg.append("text").attr({
+        x: 18,
+        y: 141,
+        "font-size": 10,
+        fill: "gray"
+    }).text("Sprints");
+
+    svg.append("rect").attr({
+        fill: "#FFF2BB",
+        height: 15,
+        width: 50,
+        x: 10,
+        y: 150
+    });
+    svg.append("text").attr({
+        x: 21,
+        y: 161,
+        "font-size": 10,
+        fill: "gray"
+    }).text("Tasks");
+
+    svg.append("circle").attr({
+        fill: "#669900",
+        r: 5,
+        cx: 14,
+        cy: 180
+    });
+    svg.append("text").attr({
+        x: 22,
+        y: 184,
+        "font-size": 10,
+        fill: "gray"
+    }).text("Milestones");
+
+    svg.append("circle").attr({
+        fill: "#ED4848",
+        r: 5,
+        cx: 14,
+        cy: 200
+    });
+    svg.append("text").attr({
+        x: 22,
+        y: 204,
+        "font-size": 10,
+        fill: "gray"
+    }).text("Meetings");
 
     //--------------------------------------------------------------------------
     //
@@ -72,7 +147,7 @@ function timeline(domElement) {
             activities: "",
             fill: "#0040ff"
         }
-        console.log(items[0]);
+        // console.log(items[0]);
         items.push(day);
 
         function showItems(n) {
@@ -200,7 +275,8 @@ function timeline(domElement) {
         band.trackOffset = 4;
         // Prevent tracks from getting too high
         band.trackHeight = Math.min((band.h - band.trackOffset) / data.nTracks, 20);
-        band.itemHeight = band.trackHeight * 0.8,
+        // band.trackHeight = 20;
+        band.itemHeight = band.trackHeight * 0.95,
         band.parts = [],
         band.instantWidth = 100; // arbitray value
 
@@ -227,12 +303,13 @@ function timeline(domElement) {
             .enter().append("svg")
             .attr("y", function (d) { return band.yScale(d.track); })
             .attr("height", band.itemHeight)
-            .attr("class", function (d) { return d.instant ? "part instant" : "part interval";})
+            .attr("class", function (d) { return d.instant ? "instant" : "interval";})
             .on("click", click);
 
         var intervals = d3.select("#band" + bandNum).selectAll(".interval");
         intervals.append("rect")
-            .attr("width", "200%")
+            // .attr("class", "interval")
+            .attr("width", "100%")
             .attr("height", "100%")
             .attr("fill", function (d) { return d.fill; });
         intervals.append("text")
@@ -364,7 +441,7 @@ function timeline(domElement) {
 
         function getHtml(element, d) {
             var html;
-            if (element.attr("class") === "part interval") {
+            if (element.attr("class") === "interval") {
                 html = d.label + "<br>" + (formatDateDisplay(d.start)) + " - <br>" + (formatDateDisplay(d.end));
             } else {
                 html = d.label + "<br>" + (formatDateDisplay(d.start));

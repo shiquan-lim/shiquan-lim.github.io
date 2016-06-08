@@ -60,7 +60,8 @@
 .interval {
     /*border-radius: 25px;*/
     /*fill: #FFF2BB;
-*/    stroke-width: 6;
+*/  stroke-width: 6;
+    /*height: 40px;*/
     cursor : default;
     pointer-events: true;
 }
@@ -69,17 +70,17 @@
     /*fill: #ED4848;*/
     stroke-width: 6;
     cursor : default;
-    /*pointer-events: true;*/
+    pointer-events: true;
 }
 
 .instantLabel {
-    fill : blue;
+    fill : black;
     font: 10px sans-serif;
     shape-rendering: crispEdges;
 }
 
 .intervalLabel {
-    fill : black;
+    fill : gray;
     font: 10px sans-serif;
     shape-rendering: crispEdges;
 }
@@ -117,7 +118,8 @@
     width: auto;                    
     height: auto;                   
     padding: 2px;               
-    font: 12px sans-serif;      
+    font: 12px sans-serif;   
+    color: white;   
     background: lightsteelblue; 
     border: 0px;        
     border-radius: 8px;         
