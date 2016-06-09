@@ -40,7 +40,8 @@
 <label for="metric">Select metric to view:</label>
 <select id="metric" class="form-control">
   <option value="schedule">Schedule</option>
-  <option value="bug">Bug</option>
+  <option value="bugOccur">Bug Occurences</option>
+  <option value="bugScore">Bug Score</option>
   <option value="relworkload">Relative Workload</option>
   <option value="workloadbreak">Workload Breakdown</option>
   <option value="interesting">Interesting</option>
@@ -76,7 +77,7 @@
         // alert(dataObject);
         chart=generateChart(metric, period);
         // message="You are now viewing a chart!";
-        document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text;
+        document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text.toLowerCase() + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text.toLowerCase();
 
         document.getElementById("message").style.display = "initial";
     }

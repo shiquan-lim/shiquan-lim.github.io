@@ -28,6 +28,23 @@ function getMetricData() {
 					"planned": 13,
 					"actual": 11
 				}
+			],
+			"bugs": [
+				{
+					"score": 30
+				},
+				{
+					"type": "high",
+					"count": 4
+				},
+				{
+					"type": "medium",
+					"count": 2
+				},
+				{
+					"type": "low",
+					"count": 6
+				}
 			]
 		},
 		{
@@ -57,6 +74,23 @@ function getMetricData() {
 					"name": "Shi Quan",
 					"planned": 13,
 					"actual": 13
+				}
+			],
+			"bugs": [
+				{
+					"score": 22
+				},
+				{
+					"type": "high",
+					"count": 2
+				},
+				{
+					"type": "medium",
+					"count": 5
+				},
+				{
+					"type": "low",
+					"count": 7
 				}
 			]
 		}
