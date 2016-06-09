@@ -12,6 +12,7 @@
   	<script src="../lib/jquery-2.2.3.js"></script>
   	<script src="../styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
   	<script src="../styles/bootbox.js"></script>
+  	<script src="../data/workload_data.js"></script>
   	<link rel="stylesheet" type="text/css" href="../styles/bootstrap-3.3.6-dist/css/bootstrap.css">
   	<link rel="stylesheet" class="button" href="../styles/button.css"/>
 </head>
@@ -40,19 +41,20 @@
 <select id="metric" class="form-control">
   <option value="schedule">Schedule</option>
   <option value="bug">Bug</option>
-  <option value="workload">Workload</option>
+  <option value="relworkload">Workload (Relative)</option>
+  <option value="workloadbreak">Workload (Breakdown)</option>
   <option value="interesting">Interesting</option>
 </select>
 <label for="period">Select period:</label>
 <select id="period" class="form-control">
-  <option value="schedule">All</option>
-  <option value="bug">Sprint 1</option>
-  <option value="workload">Sprint 2</option>
-  <option value="interesting">Sprint 3</option>
+  <option value="all">All</option>
+  <option value="1">Sprint 1</option>
+  <option value="2">Sprint 2</option>
 </select>
 <div align="left"><input type="submit" class="button" value="Submit" onclick="captureInput()"/></div>
 </div>
 </br>
+<div id="message"></div>
 <div id="chart" align="center"></div>
 <script>
 	// generateChart('pie');
@@ -69,6 +71,7 @@
 
         // alert(dataObject);
         chart=generateChart(metric, period);
+        message="You are now viewing a chart!";
     }
 </script>
 

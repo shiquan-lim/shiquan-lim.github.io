@@ -1,6 +1,8 @@
 function generateChart(metric, period) {
 	if(metric==='schedule') {
 		renderSchedule(period);
+	} else if(metric==='relworkload') {
+		renderRelativeWorkload(period);
 	}
 }
 
@@ -19,3 +21,61 @@ function renderSchedule(period) {
 		}
 	});
 }
+
+function renderRelativeWorkload(period) {
+	var dataString = getWorkloadData();
+	var workloadData = formatData(dataString);
+	console.log(workloadData);
+	var plannedChart = c3.generate({
+		// bindto: "#chart",
+		data: {
+			json: workloadData,
+			type: "pie",
+			onmouseover: function(d) {
+				return d.actual;
+			}
+		},
+	 	tooltip: {
+			format: {
+				value: function (value) { return value + " hours"; }
+			}
+		},
+		color: {
+			pattern: ["#994f00", "#ffc180", "#cccc00", "#ff9999", "#0099ff"]
+		}
+	});
+	function formatData(dataString) {
+		// convert data to similar format {"data1": 30,"data2": 120,"data3": 80}
+		var workloadData = {};
+		if(period==="all") {
+			for(var sprintNum=1; sprintNum<=dataString.length; sprintNum++) {
+				var sprintData = dataString.filter(
+					function(dataString) {
+						return dataString.sprint === sprintNum
+					}
+				);
+				for(var i=0; i< sprintData[0].members.length; i++) {
+					// workloadData.push(sprintData[0].members[i].name, sprintData[0].members[i].actual);
+					if(sprintNum===1) {
+						workloadData[sprintData[0].members[i].name] = sprintData[0].members[i].actual;
+					} else {
+						workloadData[sprintData[0].members[i].name] += sprintData[0].members[i].actual;
+					}
+				}
+			}
+		} else {
+			// get selected sprint interval
+			var sprintNum = parseInt(period);
+			var sprintData = dataString.filter(
+				function(dataString) {
+					return dataString.sprint === sprintNum
+				}
+			);
+			for(var i=0; i< sprintData[0].members.length; i++) {
+				// workloadData.push(sprintData[0].members[i].name, sprintData[0].members[i].actual);
+				workloadData[sprintData[0].members[i].name] = sprintData[0].members[i].actual;
+			}
+		}
+		// console.log(sprintData[0].sprint);
+		return workloadData;
+	}}
