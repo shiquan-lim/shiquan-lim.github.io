@@ -12,7 +12,7 @@
   	<script src="../lib/jquery-2.2.3.js"></script>
   	<script src="../styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
   	<script src="../styles/bootbox.js"></script>
-  	<script src="../data/workload_data.js"></script>
+  	<script src="../data/metric_data.js"></script>
   	<link rel="stylesheet" type="text/css" href="../styles/bootstrap-3.3.6-dist/css/bootstrap.css">
   	<link rel="stylesheet" class="button" href="../styles/button.css"/>
 </head>
@@ -41,24 +41,28 @@
 <select id="metric" class="form-control">
   <option value="schedule">Schedule</option>
   <option value="bug">Bug</option>
-  <option value="relworkload">Workload (Relative)</option>
-  <option value="workloadbreak">Workload (Breakdown)</option>
+  <option value="relworkload">Relative Workload</option>
+  <option value="workloadbreak">Workload Breakdown</option>
   <option value="interesting">Interesting</option>
 </select>
 <label for="period">Select period:</label>
 <select id="period" class="form-control">
-  <option value="all">All</option>
+  <option value="all">All Sprints</option>
   <option value="1">Sprint 1</option>
   <option value="2">Sprint 2</option>
 </select>
-<div align="left"><input type="submit" class="button" value="Submit" onclick="captureInput()"/></div>
-</div>
+<input type="button" class="button" value="Submit" onclick="captureInput(); return false;"/>
 </br>
-<div id="message"></div>
+
+<div class="text-center">
+	<h3 id="message" class="text-muted">
+	</h3>
+</div>
+</div>
+
+</br>
 <div id="chart" align="center"></div>
 <script>
-	// generateChart('pie');
-
 	function captureInput(){
         var metric = document.getElementById('metric').value;
         var period = document.getElementById('period').value;
@@ -71,7 +75,10 @@
 
         // alert(dataObject);
         chart=generateChart(metric, period);
-        message="You are now viewing a chart!";
+        // message="You are now viewing a chart!";
+        document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text;
+
+        document.getElementById("message").style.display = "initial";
     }
 </script>
 

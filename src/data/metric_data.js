@@ -1,4 +1,4 @@
-function getWorkloadData() {
+function getMetricData() {
 	return [
 		{
 			"sprint": 1,

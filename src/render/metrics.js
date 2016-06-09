@@ -23,7 +23,7 @@ function renderSchedule(period) {
 }
 
 function renderRelativeWorkload(period) {
-	var dataString = getWorkloadData();
+	var dataString = getMetricData();
 	var workloadData = formatData(dataString);
 	console.log(workloadData);
 	var plannedChart = c3.generate({
@@ -40,9 +40,9 @@ function renderRelativeWorkload(period) {
 				value: function (value) { return value + " hours"; }
 			}
 		},
-		color: {
-			pattern: ["#994f00", "#ffc180", "#cccc00", "#ff9999", "#0099ff"]
-		}
+		// color: {
+		// 	pattern: ["#994f00", "#ffc180", "#cccc00", "#ff9999", "#0099ff"]
+		// }
 	});
 	function formatData(dataString) {
 		// convert data to similar format {"data1": 30,"data2": 120,"data3": 80}
