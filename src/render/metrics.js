@@ -26,7 +26,7 @@ function renderSchedule(period) {
 
 function renderRelativeWorkload(period) {
 	var dataString = getMetricData();
-	var workloadData = formatData(dataString);
+	var workloadData = formatworkloadData(dataString);
 	// console.log(workloadData);
 	var workloadChart = c3.generate({
 		bindto: "#chart",
@@ -46,7 +46,7 @@ function renderRelativeWorkload(period) {
 			pattern: ["#994f00", "#ffc180", "#cccc00", "#ff9999", "#0099ff"]
 		}
 	});
-	function formatData(dataString) {
+	function formatworkloadData(dataString) {
 		// convert data to similar format {"data1": 30,"data2": 120,"data3": 80}
 		var workloadData = {};
 		if(period==="all") {
@@ -85,7 +85,7 @@ function renderRelativeWorkload(period) {
 
 function renderBugOcc(period) {
 	var dataString = getMetricData();
-	var bugData = formatData(dataString);
+	var bugData = formatBugData(dataString);
 	var bugChart = c3.generate({
 		bindto: "#chart",
 		data: {
@@ -102,7 +102,7 @@ function renderBugOcc(period) {
 			pattern: ["#ff0000", "#e6e600", "#3399ff"]
 		}
 	});
-	function formatData(dataString) {
+	function formatBugData(dataString) {
 		// convert data to similar format {"high": 3,"medium": 12,"low": 8,"score": 100}
 		var bugData = {};
 		if(period==="all") {
