@@ -52,7 +52,8 @@
   <option value="1">Sprint 1</option>
   <option value="2">Sprint 2</option>
 </select>
-<input type="button" class="button" value="View Chart" onclick="captureInput(); return false;"/>
+<a href="#chart" type="button" id="submit" class="button" onclick="captureInput();">Submit</a>
+<!-- <a href="#" onclick="captureInput()">Submit</a> -->
 </br>
 
 <div class="text-center">
@@ -64,23 +65,25 @@
 </br>
 <div id="chart" align="center"></div>
 <script>
+  // document.getElementById("submit").addEventListener("click", function(event){
+  //     event.preventDefault()
+  // });
 	function captureInput(){
-        var metric = document.getElementById('metric').value;
-        var period = document.getElementById('period').value;
-        //The alerts are just to test that the textarea input was entered correctly, as it sometimes behaves oddly
-        //alert(dataString);
+    var metric = document.getElementById('metric').value;
+    var period = document.getElementById('period').value;
+    //The alerts are just to test that the textarea input was entered correctly, as it sometimes behaves oddly
+    //alert(dataString);
 
-        //Convert input strings to JSON objects
-        // var metric = format(metric);
-        // var period = format(period);
+    //Convert input strings to JSON objects
+    // var metric = format(metric);
+    // var period = format(period);
 
-        // alert(dataObject);
-        chart=generateChart(metric, period);
-        // message="You are now viewing a chart!";
-        document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text.toLowerCase() + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text.toLowerCase();
-
-        document.getElementById("message").style.display = "initial";
-    }
+    // alert(dataObject);
+    chart=generateChart(metric, period);
+    // message="You are now viewing a chart!";
+    document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text.toLowerCase() + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text.toLowerCase();
+    return false;
+  }
 </script>
 
 </body>
