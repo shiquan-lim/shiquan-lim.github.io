@@ -3,8 +3,8 @@ function generateChart(metric, period) {
 		renderSchedule(period);
 	} else if(metric==='relworkload') {
 		renderRelativeWorkload(period);
-	} else if(metric==='bugOccur') {
-		renderBugOcc(period);
+	} else if(metric==='bug') {
+		renderBug(period);
 	}
 }
 
@@ -83,7 +83,7 @@ function renderRelativeWorkload(period) {
 	}
 }
 
-function renderBugOcc(period) {
+function renderBug(period) {
 	var dataString = getMetricData();
 	var bugData = formatBugData(dataString);
 	var bugChart = c3.generate({
@@ -99,7 +99,7 @@ function renderBugOcc(period) {
 		  }
 		},
 		color: {
-			pattern: ["#ff0000", "#e6e600", "#3399ff"]
+			pattern: ["#ff0000", "#e6e600", "#3399ff", "#cc6600"]
 		}
 	});
 	function formatBugData(dataString) {
@@ -113,7 +113,7 @@ function renderBugOcc(period) {
 						return dataString.sprint === sprintNum
 					}
 				);
-				for(var i=1; i< sprintData[0].bugs.length; i++) {
+				for(var i=0; i< sprintData[0].bugs.length; i++) {
 					if(sprintNum===1) {
 						bugData[sprintData[0].bugs[i].type] = []
 						bugData[sprintData[0].bugs[i].type].push(sprintData[0].bugs[i].count);
@@ -130,7 +130,7 @@ function renderBugOcc(period) {
 					return dataString.sprint === sprintNum
 				}
 			);
-			for(var i=1; i< sprintData[0].bugs.length; i++) {
+			for(var i=0; i< sprintData[0].bugs.length; i++) {
 				bugData[sprintData[0].bugs[i].type] = sprintData[0].bugs[i].count;
 			}
 		}
@@ -138,7 +138,6 @@ function renderBugOcc(period) {
 		return bugData;
 	}
 }
-
 
 
 

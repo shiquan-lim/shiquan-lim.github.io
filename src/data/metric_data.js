@@ -31,19 +31,20 @@ function getMetricData() {
 			],
 			"bugs": [
 				{
-					"score": 30
+					"type": "critical",
+					"count": 0
 				},
 				{
 					"type": "high",
-					"count": 4
-				},
-				{
-					"type": "medium",
 					"count": 2
 				},
 				{
 					"type": "low",
 					"count": 6
+				},
+				{
+					"type": "score",
+					"count": 18
 				}
 			]
 		},
@@ -78,19 +79,20 @@ function getMetricData() {
 			],
 			"bugs": [
 				{
-					"score": 22
+					"type": "critical",
+					"count": 1
 				},
 				{
 					"type": "high",
-					"count": 2
-				},
-				{
-					"type": "medium",
 					"count": 5
 				},
 				{
 					"type": "low",
 					"count": 7
+				},
+				{
+					"type": "score",
+					"count": 44
 				}
 			]
 		}
