@@ -25,6 +25,8 @@
     <h2 class="text-center">Marksmen Project Metrics</h2>
     <p class="text-center">Select the metric to view and the sprint period</br>Currently only bug occurences (with test data) and relative workload charts are functional</p>
   </div>
+
+
 <label for="metric">Select metric to view:</label>
 <select id="metric" class="form-control">
   <option value="schedule">Schedule</option>
@@ -44,13 +46,15 @@
 </br>
 
 <div class="text-center">
-	<h3 id="message" class="text-muted">
-	</h3>
+	<h3 id="message" class="text-muted"></h3>
 </div>
 </div>
 
 </br>
 <div id="chart" align="center"></div>
+
+
+
 <script>
   // document.getElementById("submit").addEventListener("click", function(event){
   //     event.preventDefault()
@@ -67,8 +71,8 @@
 
     // alert(dataObject);
     chart=generateChart(metric, period);
-    // message="You are now viewing a chart!";
-    document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex ].text.toLowerCase() + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text.toLowerCase();
+    message="You are now viewing a chart!";
+    document.getElementById("message").innerHTML = "Viewing " + document.getElementById('metric').options[document.getElementById("metric").selectedIndex].text.toLowerCase() + " metric for " + document.getElementById('period').options[document.getElementById("period").selectedIndex ].text.toLowerCase();
     return false;
   }
 </script>
