@@ -52,13 +52,13 @@ return {
                 {
                   "name": "Administrator Authentication",
                   "colour": "#F3DADA",
-                  "details": "Allows upload of various rich media, from documents to links and videos.",
+                  "details": "Utilise Firebase authentication to differentiate admin users from student users and render the according pages.",
                   "size": 4
                 },
                 {
                   "name": "Set Session Status",
                   "colour": "#F3DADA",
-                  "details": "Allows upload of various rich media, from documents to links and videos.",
+                  "details": "Set a status to the event in order to determine if the event should be available for participation.",
                   "size": 4
                 },
               ]
@@ -128,13 +128,13 @@ return {
             {
               "name": "Student ID",
               "colour": "#EBAFAF",
-              "details": "Students are provided with a text area to submit code snippets or an upload option to upload a code-based file for submission in response to a given challenge.",
+              "details": "Utilise Firebase authentication to differentiate admin users from student users and render the according pages.",
               "size": 8
             },
             {
               "name": "Survey",
               "colour": "#EBAFAF",
-              "details": "Students are provided with a text area to submit code snippets or an upload option to upload a code-based file for submission in response to a given challenge.",
+              "details": "Participate in a survey to gather student sentiment regarding the event challenges.",
               "size": 8
             }
         ]
@@ -154,19 +154,19 @@ return {
           {
             "name": "Scoring System",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Dictate a scoring system to allocate points to challenges in order to display comprehensive results to the report.",
             "size": 4
           },
           {
             "name": "Intra-Event Comparison",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Dictate statistics by which to compare challenges administered within the same class (event) and compare their relative performance.",
             "size": 4
           },
           {
             "name": "Basic Visualisation",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Allow for basic visualisation of event statistics in graphical or infographic format.",
             "size": 4
           },
         ]
@@ -185,19 +185,19 @@ return {
           {
             "name": "Data Extranction",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Extract relevant data from Firebase.",
             "size": 4
           },
           {
             "name": "Data Transformation",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Perform relevant data transformation to allow data to be rendered into a user-friendly manner.",
             "size": 4
           },
           {
             "name": "Data Loading",
             "colour": "#F3DADA",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Load the data to client view to show challenge, student, and event statistics.",
             "size": 4
           },
         ]
@@ -243,13 +243,13 @@ return {
           {
             "name": "Result Computation",
             "colour": "#ffffe6",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Compute and aggregate relevant data to show inofrmation that will aid the admin user in future decision making.",
             "size": 4
           },
           {
             "name": "Chart Rendering",
             "colour": "#ffffe6",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Render computed results to basic charts such as bar, pie, scatter or line charts.",
             "size": 4
           }
         ]
@@ -268,19 +268,19 @@ return {
           {
             "name": "Sunburst Model",
             "colour": "#ffffe6",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Visualise hierarchical data formats. In this case, it will represent a sequence of actions by student users that led them to an ultimate conclusion.",
             "size": 4
           },
           {
             "name": "Sentiment Cloud",
             "colour": "#ffffe6",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Mine sentiment results from surveys administered to tudent users and display top word hits by larger font sizes.",
             "size": 4
           },
           {
             "name": "Interactive Charts",
             "colour": "#ffffe6",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Render charts that display information according to user selection, such as by a specified time period or for a specific student user.",
             "size": 4
           }
         ]
@@ -307,13 +307,13 @@ return {
           {
             "name": "Mentorship Analysis",
             "colour": " #e6ffff",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Analyse which students frequently mentored other sutdents and the corresponding results.",
             "size": 4
           },
           {
             "name": "Performance Analytics",
             "colour": " #e6ffff",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Provide in-depth view of student performance, and their predicted performance for a given challenge type in up-coming events.",
             "size": 4
           }
         ]
@@ -326,13 +326,13 @@ return {
           {
             "name": "Hypothesis Testing",
             "colour": " #e6ffff",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Set null cases to prove a hypothesis on the outcome of an action, such as partitioning a class in a certain manner or choosing a certain sequence of challenges.",
             "size": 4
           },
           {
             "name": "Decision Tree Support",
             "colour": " #e6ffff",
-            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "details": "Support the recommendation system by utilising a pre-determined decision tree to calculate a student's path and the subsequent nodes that will be visited.",
             "size": 4
           }
         ]
