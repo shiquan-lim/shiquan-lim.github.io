@@ -4,7 +4,7 @@ function renderScope(root) {
     root = root;
 
 var force = d3.layout.force()
-    .linkDistance(95)
+    .linkDistance(70)
     .charge(-200)
     .gravity(.05)
     .size([width, height])
@@ -195,23 +195,5 @@ function connectedNodes() {
     .duration(300).style("opacity", 1);
         toggle = 0;
     }
-}
-
-function readTextFile(file)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
-        }
-    }
-    rawFile.send(null);
 }
 }

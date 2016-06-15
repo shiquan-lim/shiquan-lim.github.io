@@ -2,20 +2,25 @@ start,end,label,activities,fill
 2016-05-12,2016-05-26,Sprint 1,Preparation and technologies research,#F3DADA
 2016-05-26,2016-06-12,Sprint 2,Preparation and testing of technologies,#F3DADA
 2016-06-13,2016-06-26,Sprint 3,,#F3DADA
-2016-06-13,2016-06-26,Create Session,Under Class Session > Administrator module,#FFF2BB
-2016-06-13,2016-06-26,Jeopardy,Under Class Session > Student module,#FFF2BB
-2016-06-13,2016-06-26,MCQ,Under Class Session > Student module,#FFF2BB
+2016-06-13,2016-06-26,Administrator Authentication,Under Class Session > Administrator > Create Session module,#FFF2BB
+2016-06-13,2016-06-26,Set Session Status,Under Class Session > Administrator > Create Session module,#FFF2BB
+2016-06-13,2016-06-26,Jeopardy Challenge,Under Class Session > Student module,#FFF2BB
+2016-06-13,2016-06-26,MCQ Challenge,Under Class Session > Student module,#FFF2BB
 2016-06-27,2016-07-10,Sprint 4,,#F3DADA
+2016-06-27,2016-07-10,Survey,Under Class Session > Student module,#FFF2BB
+2016-06-27,2016-07-10,Student Identification,Under Class Session > Student module,#FFF2BB
 2016-06-27,2016-07-10,Content Builder,Under Class Session > Administrator > Create Challenges module,#FFF2BB
 2016-06-27,2016-07-10,Content Upload,Under Class Session > Administrator > Create Challenges module,#FFF2BB
 2016-06-27,2016-07-10,Team Creation,Under Class Session > Administrator module,#FFF2BB
 2016-07-11,2016-07-24,Sprint 5,,#F3DADA
-2016-07-11,2016-07-24,Journalling,Under Class Session > Student module,#FFF2BB
-2016-07-11,2016-07-24,Code,Under Class Session > Student module,#FFF2BB
+2016-07-11,2016-07-24,Journalling Challenge,Under Class Session > Student module,#FFF2BB
+2016-07-11,2016-07-24,Code Challenge,Under Class Session > Student module,#FFF2BB
 2016-07-11,2016-07-24,Index Card,Under Class Session > Student module,#FFF2BB
 2016-7-22,,Merge 1,,#669900
 2016-07-25,2016-08-07,Sprint 6,,#F3DADA
-2016-07-25,2016-08-07,Report Generation,Under Analytics module,#FFF2BB
+2016-07-25,2016-08-07,Scoring System,Under Analytics > Report Generation module,#FFF2BB
+2016-07-25,2016-08-07,Intra-Event Comparison,Under Analytics > Report Generation module,#FFF2BB
+2016-07-25,2016-08-07,Basic Visualisation,Under Analytics > Report Generation module,#FFF2BB
 2016-07-25,2016-08-07,Completion Statistics,Under Analytics module,#FFF2BB
 2016-07-29,,UAT1,,#669900
 2016-08-08,2016-08-21,Sprint 7,,#F3DADA
@@ -26,12 +31,17 @@ start,end,label,activities,fill
 2016-08-22,2016-09-04,Deleting Down Experiment,Under Class Session > Administrator module,#FFF2BB
 2016-9-02,,Merge 2,,#669900
 2016-09-05,2016-09-18,Sprint 9,,#F3DADA
-2016-09-05,2016-09-18,Raw Data Display,Under Analytics module,#FFF2BB
-2016-09-05,2016-09-18,Result DashBoard,Under Data Visualisation module,#FFF2BB
+2016-09-05,2016-09-18,Data Extraction,Under Analytics > Raw Data Display module,#FFF2BB
+2016-09-05,2016-09-18,Data Transformation,Under Analytics > Raw Data Display module,#FFF2BB
+2016-09-05,2016-09-18,Data Loading,Under Analytics > Raw Data Display module,#FFF2BB
+2016-09-05,2016-09-18,Result Comparison,Under Data Visualisation > Result DashBoard module,#FFF2BB
+2016-09-05,2016-09-18,Chart Rendering,Under Data Visualisation > Result DashBoard module,#FFF2BB
 2016-09-13,,UAT2,,#669900
 2016-09-19,2016-10-02,Sprint 10,,#F3DADA
 2016-09-19,2016-10-02,Data Export,Under Data Visualisation module,#FFF2BB
-2016-09-19,2016-10-02,Advanced Charts,Under Data Visualisation module,#FFF2BB
+2016-09-19,2016-10-02,Sunburst Model,Under Data Visualisation > Advanced Charts module,#FFF2BB
+2016-09-19,2016-10-02,Sentiment Cloud,Under Data Visualisation > Advanced Charts module,#FFF2BB
+2016-09-19,2016-10-02,Interactive Charts,Under Data Visualisation > Advanced Charts module,#FFF2BB
 2016-10-03,2016-10-16,Sprint 11,,#F3DADA
 2016-10-03,2016-10-16,Automated Field Completion,Under Usability module,#FFF2BB
 2016-10-03,2016-10-16,Ease of Access,Under Usability module,#FFF2BB
@@ -44,17 +54,20 @@ start,end,label,activities,fill
 2016-11-14,2016-11-27,Sprint 14,Reserved for task push backs,#F3DADA
 2016-11-28,2016-12-02,Sprint 15,Reserved for task push backs,#F3DADA
 2016-11-30,,Merge 4,,#669900
-2016-02-24,,Team Meeting 1,,#ED4848
-2016-01-18,,Client Meeting 1,,#ED4848
-2016-02-03,,Client Meeting 2,,#ED4848
-2016-03-24,,Client Meeting 3,,#ED4848
-2016-05-02,,Client Meeting 4,,#ED4848
-2016-05-25,,Client Meeting 5,,#ED4848
-2016-05-25,,Review 1,,#ED4848
-2016-05-11,,Planning 1,,#ED4848
-2016-05-25,,Planning 2,,#ED4848
+2016-02-24,,TM1,Team Meeting 1,#ED4848
+2016-01-18,,CM1,Client Meeting 1,#ED4848
+2016-02-03,,CM2,Client Meeting 2,#ED4848
+2016-03-24,,CM3,Client Meeting 3,#ED4848
+2016-05-02,,CM4,Client Meeting 4,#ED4848
+2016-05-25,,CM5,Client Meeting 5,#ED4848
+2016-05-11,,SP1,Planning 1,#ED4848
+2016-05-25,,SR1,Review 1,#ED4848
+2016-05-25,,SP2,Planning 2,#ED4848
+2016-06-12,,SR2,Review 2,#ED4848
+2016-06-12,,SP3,Planning 3,#ED4848
 2016-05-15,,IS480 Start,,#669900
 2016-06-15,,Proposal Submission,,#669900
+2016-06-27,,SM1,Supervisor Meeting 1,#ED4848
 2016-08-10,,Acceptance Period 1,SIS SR 2.1 (Period from 2016-08-10 to 2016-08-12),#669900
 2016-08-15,,Acceptance Period 2,SIS SR 2.1 (Period from 2016-08-15 to 2016-08-17),#669900
 2016-08-18,,Registration and Class,1900-2100 @ NAKA,#669900

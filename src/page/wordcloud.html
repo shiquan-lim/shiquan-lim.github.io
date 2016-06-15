@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!-- 
+written by Lim Shi Quan
+contact: shiquan-lim@hpe.com 
+-->
+<html>
+<head>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="d3.layout.cloud.js"></script>
+<script src="chartpopup.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.6-dist/css/bootstrap.css">
+  <script src="jquery-2.2.3.js"></script>
+  <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+  <script src="bootbox.js"></script>
+<meta charset="utf-8">
+</head>
+<body>  
+<script>
+    //arguments passed in when this class is modularised
+    var metaDataObject = {"type":"wordcloud","label":"data1","data":"data2","color":"color"};
+
+    var dataObject = {"data1":["apple","orange","pear","grapes","mango","papaya","kiwi","banana", "watermelon","strawberry","honeydew","dragonfruit","durian","pineapple","jackfruit","lychee","mangosteen","passionfruit","raspberry","blueberry","rockmelon","coconut","lemon","lime","pomelo","rambutan","aguave","longan","mandarin","calamansi","sugarcane","avocado","bittergourd","wintermelon","dates"],"data2":[100,50,150,40,70,60,30,35,95,120,60,70,80,15,30,140,100,170,200,40,90,20,180,99,66,55,130,20,50,55,100,120,30,20,90],"color":["#23af50"]};
+
+    var rawData = "How the Word Cloud Generator Works The layout algorithm for positioning words without overlap is available on GitHub under an open source license as d3-cloud. Note that this is the only the layout algorithm and any code for converting text into words and rendering the final output requires additional development.As word placement can be quite slow for more than a few hundred words, the layout algorithm can be run asynchronously, with a configurable time step size. This makes it possible to animate words as they are placed without stuttering. It is recommended to always use a time step even without animations as it prevents the browser’s event loop from blocking while placing the words.The layout algorithm itself is incredibly simple. For each word, starting with the most “important”:Attempt to place the word at some starting point: usually near the middle, or somewhere on a central horizontal line.If the word intersects with any previously placed words, move it one step along an increasing spiral. Repeat until no intersections are found.The hard part is making it perform efficiently! According to Jonathan Feinberg, Wordle uses a combination of hierarchical bounding boxes and quadtrees to achieve reasonable speeds.Glyphs in JavaScript There isn’t a way to retrieve precise glyph shapes via the DOM, except perhaps for SVG fonts. Instead, we draw each word to a hidden canvas element, and retrieve the pixel data.Retrieving the pixel data separately for each word is expensive, so we draw as many words as possible and then retrieve their pixels in a batch operation.Sprites and MasksMy initial implementation performed collision detection using sprite masks. Once a word is placed, it doesn't move, so we can copy it to the appropriate position in a larger sprite representing the whole placement area.The advantage of this is that collision detection only involves comparing a candidate sprite with the relevant area of this larger sprite, rather than comparing with each previous word separately.Somewhat surprisingly, a simple low-level hack made a tremendous difference: when constructing the sprite I compressed blocks of 32 1-bit pixels into 32-bit integers, thus reducing the number of checks (and memory) by 32 times.In fact, this turned out to beat my hierarchical bounding box with quadtree implementation on everything I tried it on (even very large areas and font sizes). I think this is primarily because the sprite version only needs to perform a single collision test per candidate area, whereas the bounding box version has to compare with every other previously placed word that overlaps slightly with the candidate area.Another possibility would be to merge a word’s tree with a single large tree once it is placed. I think this operation would be fairly expensive though compared with the analagous sprite mask operation, which is essentially ORing a whole block."
+
+    //transform raw data
+    // var frequency_list = transformData(metaDataObject, dataObject);
+    var frequency_list = mineText(rawData);
+
+    for(var i=0; i<frequency_list.length; i++) {
+        // console.log(frequency_list[i]);
+    }
+    console.log(frequency_list.length);
+
+    //set cloud container variables
+    var cloudWidth = 900;
+    var cloudHeight = 700;
+
+    // var fontSize = d3.scale.log().range([1, 20]);
+    var fontSize = d3.scale.linear()
+        .domain([0, 200])
+        .range([5, 80]);
+
+    var fill = d3.scale.category20();
+
+    var layout = d3.layout.cloud()
+        .size([cloudWidth, cloudHeight])
+        .words(frequency_list)
+        .padding(5)
+        .rotate(function(d) { return ~~(Math.random() * 9) * 15 - 60; })
+        .font("Impact")
+        .fontSize(function(d) { return fontSize(d.size); })
+        .on("end", draw);
+
+    layout.start();
+
+    function draw(words) {
+      d3.select("body").append("svg")
+          .attr("width", layout.size()[0])
+          .attr("height", layout.size()[1])
+        .append("g")
+          .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+        .selectAll("text")
+          .data(words)
+        .enter().append("text")
+          .style("font-size", function(d) { return (d.size) + "px"; })
+          .style("font-family", "Impact")
+          .style("fill", function(d, i) { return fill(i); })
+          .attr("text-anchor", "middle")
+          .attr("transform", function(d) {
+            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+          })
+          .text(function(d) { return d.text; })
+          .on('click', function (d, i) {
+            var popup = new chartpopup();
+            popup.show({text: d.text, occurences: d.size}, d);
+          });
+    }
+
+    // function mineText(rawData) {
+    //     var frequency_list = [];
+    //     var wordsList = [];
+    //     var text = "";
+    //     for(i=0; i<rawData.length; i++) {
+    //         var char = rawData[i];
+    //         if(!char.match(/[a-z]/i)) {
+    //             text = text.toLowerCase();
+    //             var word = {
+    //                 text: text,
+    //                 size: ~~(Math.random()*55)
+    //             }
+    //             frequency_list.push(word);
+    //             text="";
+    //         } else {
+    //             text+=char;
+    //         }
+    //     }
+    //     return frequency_list;
+    // }
+
+    function mineText(rawData) {
+        var frequency_list = [];
+        var words = [];
+        var text = "";
+        for(i=0; i<rawData.length; i++) {
+            var char = rawData[i];
+            if(!char.match(/[a-z]/i)) {
+                text = text.toLowerCase();
+                var word = {
+                    text: text,
+                    size: 1
+                }
+                words.push(word);
+                text="";
+            } else {
+                text+=char;
+            }
+        }
+
+        var reduced_words = [];
+
+        for(var i=0; i<words.length; i++) {
+            var item = words[i];
+            if(!reduced_words.includes(item.text)) {
+                reduced = {
+                    text: item.text,
+                    size:  words.reduce(function(n, word) {
+                        return n + (word.text == item.text)*10;
+                    }, 0)
+                }
+                frequency_list.push(reduced);
+                reduced_words.push(item.text);
+            }
+        }
+
+        return frequency_list;
+    }
+
+    function transformData(metaDataObject, dataObject) {
+        //To transform data to this format:
+        // var frequency_list = [{"text":"apple","size":100}, {"text":"orange","size":100}, {"text":"pear","size":25}, {"text":"grapes","size":301}, {"text":"mango","size":56}];
+        var frequency_list = [];
+        var wordFieldName = metaDataObject.label;
+        var valuesFieldName = metaDataObject.data;
+        var wordList = dataObject[wordFieldName];
+        var valuesList = dataObject[valuesFieldName];
+        for(var itemIndex=0; itemIndex<wordList.length; itemIndex++) {
+            var item = {
+                text: wordList[itemIndex].toUpperCase(),
+                size: valuesList[itemIndex]
+            }
+            frequency_list.push(item);
+        }
+        return frequency_list;
+    }
+
+    function handleMouseOver(d, i) {
+        d3.select(this).transition().attr({
+            fill: "black",
+            "font-size": scale(d.size) + 5 + "px"
+        });
+        cloudContainer.append("text").attr({
+            id: "t" + d.text + "-" + d.size,
+            x: 10,
+            y:20
+        })
+        .text(function() {
+            return ["weight: " + d.size];
+            // return [""+occupiedSpaces[1].top];
+        })
+    }
+
+    function handleMouseOut(d, i) {
+        d3.select(this).transition().attr({
+            fill: color(i),
+            "font-size": scale(d.size) + "px"
+        });
+        d3.select("#t" + d.text + "-" + d.size).remove();
+    }
+</script>
+</body>
+</html>
