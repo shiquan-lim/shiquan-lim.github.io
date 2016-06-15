@@ -3,21 +3,6 @@ function renderScope(root) {
     height = 800,
     root = root;
 
-var force = d3.layout.force()
-    .linkDistance(70)
-    .charge(-200)
-    .gravity(.05)
-    .size([width, height])
-    .on("tick", tick);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-var link = svg.selectAll(".link"),
-    node = svg.selectAll(".node");
-
-// console.log(flatten(root));
 var nodes = flatten(root),
   links = d3.layout.tree().links(nodes);
 
@@ -31,6 +16,21 @@ for(i=0; i<nodes.length; i++) {
     nodes[i].size = size;
   }
 }
+
+var force = d3.layout.force()
+    .charge(-200)
+    .gravity(.05)
+    .size([width, height])
+    .on("tick", tick);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var link = svg.selectAll(".link"),
+    node = svg.selectAll(".node");
+
+// console.log(flatten(root));
 
 //Toggle stores whether the highlighting is on
 var toggle = 0;
@@ -72,9 +72,10 @@ function update() {
 
   // Restart the force layout.
   force
-      .nodes(nodes)
-      .links(links)
-      .start();
+    .linkDistance(50)
+    .nodes(nodes)
+    .links(links)
+    .start();
 
   // Update links.
   link = link.data(links, function(d) { return d.target.id; });
@@ -114,6 +115,11 @@ function update() {
 }
 
 function tick() {
+
+  // force
+  //   .linkDistance(function(d) {
+  //     return scale(d.size)/2;
+  //   });
 
   node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   // function(d) {console.log(d.r);};

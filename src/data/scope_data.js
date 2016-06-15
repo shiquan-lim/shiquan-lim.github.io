@@ -3,6 +3,7 @@ return {
  "name": "Classmentors",
  "colour": "#F1D3BC",
  "details": "An interactive web portal for educators to test differring pedagogical approaches within the same classroom and collect data on the effectiveness of various approaches.",
+ "size": 10,
  "children": [
   {
     "name": "Primary",
@@ -47,7 +48,20 @@ return {
               "name": "Create Session",
               "colour": "#EBAFAF",
               "details": "Creates an instance of a Classmentors class session, from which subsequent activities are appended.",
-              "size": 8
+              "children": [
+                {
+                  "name": "Administrator Authentication",
+                  "colour": "#F3DADA",
+                  "details": "Allows upload of various rich media, from documents to links and videos.",
+                  "size": 4
+                },
+                {
+                  "name": "Set Session Status",
+                  "colour": "#F3DADA",
+                  "details": "Allows upload of various rich media, from documents to links and videos.",
+                  "size": 4
+                },
+              ]
             },
             {
               "name": "Create Challenges",
@@ -110,6 +124,18 @@ return {
               "colour": "#EBAFAF",
               "details": "Students are provided with a text area to submit code snippets or an upload option to upload a code-based file for submission in response to a given challenge.",
               "size": 8
+            },
+            {
+              "name": "Student ID",
+              "colour": "#EBAFAF",
+              "details": "Students are provided with a text area to submit code snippets or an upload option to upload a code-based file for submission in response to a given challenge.",
+              "size": 8
+            },
+            {
+              "name": "Survey",
+              "colour": "#EBAFAF",
+              "details": "Students are provided with a text area to submit code snippets or an upload option to upload a code-based file for submission in response to a given challenge.",
+              "size": 8
             }
         ]
       }
@@ -124,7 +150,26 @@ return {
         "name": "Report generation",
         "colour": "#DF8181",
         "details": "This module builds a report stating the descriptive analytic status of the events and surveys conducted within a particular Classmentors class session. This view will include information of individual students, teams, and class segments from the automated partitioning.",
-        "size": 20
+        "children": [
+          {
+            "name": "Scoring System",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Intra-Event Comparison",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Basic Visualisation",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+        ]
       },
       {
         "name": "Completion Statistics",
@@ -136,7 +181,26 @@ return {
         "name": "Raw Data Display",
         "colour": "#DF8181",
         "details": "Raw data display shows the raw results by means of javascript object notation (JSON) or comma seperated values (CSV).",
-        "size": 4
+        "children": [
+          {
+            "name": "Data Extranction",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Data Transformation",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Data Loading",
+            "colour": "#F3DADA",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+        ]
       }
     ]
   }
@@ -175,7 +239,20 @@ return {
         "name": "Result Dashboard",
         "colour": "#FFF2BB",
         "details": "Directly supports the \"Report Generation\" module by initialising a dashboard to complement the resultant information. Basic charts such as bar, pie, scatter, spline, and stacked bar will be supported.",
-        "size": 20
+        "children": [
+          {
+            "name": "Result Computation",
+            "colour": "#ffffe6",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Chart Rendering",
+            "colour": "#ffffe6",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          }
+        ]
       },
       {
         "name": "Data Export",
@@ -187,7 +264,26 @@ return {
         "name": "Advanced Charts",
         "colour": "#FFF2BB",
         "details": "Renders charts not supported by the \"Result Dashboard\" module. Such charts include hierarchical visualisations such as sunburst models, and interactive timeline models.",
-        "size": 15
+        "children": [
+          {
+            "name": "Sunburst Model",
+            "colour": "#ffffe6",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Sentiment Cloud",
+            "colour": "#ffffe6",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Interactive Charts",
+            "colour": "#ffffe6",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          }
+        ]
       }
     ]
   }
@@ -204,16 +300,42 @@ return {
     "details": "This module supports a higher degree of analytics than the \"Result Generation\" module.",
     "children": [
       {
-        "name": "Aggregated Analytics",
+        "name": "Predictive Analytics",
         "colour": "#C4DFE6",
         "details": "This module aims to provide insights by means of summation, averaging, and statistical methods. Other higher-level analytics such as text mining and sentiment analysis in tandem with parallel processing frameworks can be implemented here as well.",
-        "size": 30
+        "children": [
+          {
+            "name": "Mentorship Analysis",
+            "colour": " #e6ffff",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Performance Analytics",
+            "colour": " #e6ffff",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          }
+        ]
       },
       {
         "name": "Recommendation System",
         "colour": "#C4DFE6",
         "details": "Implement predictive and prescriptive analytics by means of decision trees and machine learning to provide recommendations to the content creator as to how to conduct the Classmentors class session.",
-        "size": 30
+        "children": [
+          {
+            "name": "Hypothesis Testing",
+            "colour": " #e6ffff",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          },
+          {
+            "name": "Decision Tree Support",
+            "colour": " #e6ffff",
+            "details": "Allows upload of various rich media, from documents to links and videos.",
+            "size": 4
+          }
+        ]
       }
     ]
   },
