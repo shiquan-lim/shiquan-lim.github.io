@@ -21,10 +21,15 @@ start,end,label,activities,fill
 2016-07-25,2016-08-07,Multiple Choice Challenge,Under Student Challenge module,#FFF2BB
 2016-07-25,2016-08-07,Survey Participation,Under Student Challenge module,#FFF2BB
 2016-07-25,2016-08-07,Code Review,Under Admin-Review Event module,#FFF2BB
+2016-07-25,2016-08-07,Announcements Module,Under Cohorts module,#FFF2BB
+2016-07-25,2016-08-07,Cohort Access Control,Under Cohorts module,#FFF2BB
+2016-07-25,2016-08-07,Cohort Creation,Under Cohorts module,#FFF2BB
+2016-07-25,2016-08-07,Assistant Assignment,Under Assistant module,#FFF2BB
+2016-07-25,2016-08-07,Assistant Access Control,Under Assistant module,#FFF2BB
 2016-08-02,,UAT1,,#669900
 2016-08-08,2016-08-21,Sprint 7,,#F3DADA
-2016-08-08,2016-08-21,Aggregation Across Events,Under Cohorts module,#FFF2BB
-2016-08-08,2016-08-21,Integrated Dashboard View,Under Cohorts module,#FFF2BB
+2016-08-08,2016-08-21,Aggregate Ranking Across Events,Under Cohorts module,#FFF2BB
+2016-08-08,2016-08-21,Integrated Statistic Dashboard View,Under Cohorts module,#FFF2BB
 2016-08-22,2016-09-04,Sprint 8,,#F3DADA
 2016-08-22,2016-09-04,Index Card Challenge,Under Student Challenge module,#FFF2BB
 2016-08-22,2016-09-04,Video Assessment Module,Under Student Challenge module,#FFF2BB
