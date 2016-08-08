@@ -132,15 +132,15 @@ function getMetricData() {
 				},
 				{
 					"type": "high",
-					"count": 0
+					"count": 18
 				},
 				{
 					"type": "low",
-					"count": 5
+					"count": 6
 				},
 				{
 					"type": "score",
-					"count": 5
+					"count": 24
 				}
 			]
 		},
@@ -180,7 +180,7 @@ function getMetricData() {
 				},
 				{
 					"type": "high",
-					"count": 0
+					"count": 8
 				},
 				{
 					"type": "low",
@@ -188,7 +188,7 @@ function getMetricData() {
 				},
 				{
 					"type": "score",
-					"count": 6
+					"count": 14
 				}
 			]
 		},
@@ -224,7 +224,7 @@ function getMetricData() {
 			"bugs": [
 				{
 					"type": "critical",
-					"count": 0
+					"count": 10
 				},
 				{
 					"type": "high",
@@ -232,11 +232,11 @@ function getMetricData() {
 				},
 				{
 					"type": "low",
-					"count": 4
+					"count": 8
 				},
 				{
 					"type": "score",
-					"count": 4
+					"count": 18
 				}
 			]
 		},
@@ -276,15 +276,15 @@ function getMetricData() {
 				},
 				{
 					"type": "high",
-					"count": 0
+					"count": 11
 				},
 				{
 					"type": "low",
-					"count": 3
+					"count": 8
 				},
 				{
 					"type": "score",
-					"count": 3
+					"count": 19
 				}
 			]
 		}
