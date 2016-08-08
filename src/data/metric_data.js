@@ -1,3 +1,9 @@
+function getFeatureData() {
+	return {
+		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1], 
+		"Ideal": [1,1,1,1,1,1]
+	};
+}
 function getMetricData() {
 	return [
 		{

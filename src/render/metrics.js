@@ -1,6 +1,6 @@
 function generateChart(metric, period) {
-	if(metric==='schedule') {
-		renderSchedule(period);
+	if(metric==='feature') {
+		renderFeature(period);
 	} else if(metric==='relworkload') {
 		renderRelativeWorkload(period);
 	} else if(metric==='bug') {
@@ -8,20 +8,44 @@ function generateChart(metric, period) {
 	}
 }
 
-function renderSchedule(period) {
-	var dataString = JSON.parse('{"Sprint 1": [10, 20, 30, 40, 50],"Sprint 2": [2, 4, 6, 8, 10],"Sprint 3": [5, 10, 15, 20, 25]}');
+function renderFeature(period) {
+	var featureData = getFeatureData();
+	var dataString = formatFeatureData(featureData);
+	var cats = getCategories();
 	var chart = c3.generate({
   		bindto: "#chart",
 		data: {
-			//Test data
-			// columns: [
-			// 	['data1', 50, 70, 30, 20, 10],
-			// 	['data2', 14, 56, 88, 34, 100]
-			// ],
 			json: dataString,
 			type: "spline"
-		}
+		},
+		axis: {
+	        x: {
+	            type: 'category',
+	            // categories: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5', 'Sprint 6']
+	            categories: cats
+	        }
+	    }
 	});
+	function formatFeatureData(dataString) {
+		var featureData = {};
+		if(period==="all") {
+			return dataString;
+		} else {
+			var sprintNum = parseInt(period);
+			featureData["Feature Metrics"] = dataString["Feature Metrics"][sprintNum-1];
+			featureData.Ideal = 1;
+		}
+		return featureData;
+	}
+	function getCategories() {
+		var retArr = [];
+		if(period === "all") {
+			return ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5', 'Sprint 6','Sprint 7', 'Sprint 8', 'Sprint 9', 'Sprint 10', 'Sprint 11', 'Sprint 12', 'Sprint 13', 'Sprint 14', 'Sprint 15'];
+		} else {
+			retArr.push('Sprint ' + period);
+		}
+		return retArr;
+	}
 }
 
 function renderRelativeWorkload(period) {
@@ -86,6 +110,7 @@ function renderRelativeWorkload(period) {
 function renderBug(period) {
 	var dataString = getMetricData();
 	var bugData = formatBugData(dataString);
+	var cats = getCategories();
 	var bugChart = c3.generate({
 		bindto: "#chart",
 		data: {
@@ -95,13 +120,22 @@ function renderBug(period) {
 		axis: {
 		  x: {
 		  	type: "category",
-		    categories: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5', 'Sprint 6','Sprint 7', 'Sprint 8', 'Sprint 9', 'Sprint 10', 'Sprint 11', 'Sprint 12', 'Sprint 13', 'Sprint 14', 'Sprint 15']
+		    categories: cats
 		  }
 		},
 		color: {
 			pattern: ["#ff0000", "#e6e600", "#3399ff", "#cc6600"]
 		}
 	});
+	function getCategories() {
+		var retArr = [];
+		if(period === "all") {
+			return ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5', 'Sprint 6','Sprint 7', 'Sprint 8', 'Sprint 9', 'Sprint 10', 'Sprint 11', 'Sprint 12', 'Sprint 13', 'Sprint 14', 'Sprint 15'];
+		} else {
+			retArr.push('Sprint ' + period);
+		}
+		return retArr;
+	}
 	function formatBugData(dataString) {
 		// convert data to similar format {"high": 3,"medium": 12,"low": 8,"score": 100}
 		var bugData = {};
@@ -134,7 +168,6 @@ function renderBug(period) {
 				bugData[sprintData[0].bugs[i].type] = sprintData[0].bugs[i].count;
 			}
 		}
-		console.log(bugData);
 		return bugData;
 	}
 }
