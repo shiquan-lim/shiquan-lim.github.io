@@ -1,7 +1,7 @@
 function getFeatureData() {
 	return {
-		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6], 
-		"Ideal": [1,1,1,1,1,1,1,1]
+		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6, 0.8], 
+		"Ideal": [1,1,1,1,1,1,1,1,1]
 	};
 }
 function getMetricData() {
@@ -387,6 +387,54 @@ function getMetricData() {
 				{
 					"type": "score",
 					"count": 30
+				}
+			]
+		},
+		{
+			"sprint": 9,
+			"members": [
+				{
+					"name": "Amos",
+					"planned": 24,
+					"actual": 30
+				},
+				{
+					"name": "Gideon",
+					"planned": 24,
+					"actual": 20
+				},
+				{
+					"name": "Kuan Yong",
+					"planned": 24,
+					"actual": 26
+				},
+				{
+					"name": "Sheryl",
+					"planned": 24,
+					"actual": 22
+				},
+				{
+					"name": "Shi Quan",
+					"planned": 24,
+					"actual": 24
+				}
+			],
+			"bugs": [
+				{
+					"type": "critical",
+					"count": 0
+				},
+				{
+					"type": "high",
+					"count": 16
+				},
+				{
+					"type": "low",
+					"count": 8
+				},
+				{
+					"type": "score",
+					"count": 24
 				}
 			]
 		}
