@@ -72,6 +72,9 @@ start,end,label,activities,fill
 2016-05-02,,CM4,Client Meeting 4,#ED4848
 2016-05-25,,CM5,Client Meeting 5,#ED4848
 2016-06-29,,CM6,Client Meeting 6,#ED4848
+2016-07-27,,CM7,Client Meeting 7,#ED4848
+2016-08-10,,CM8,Client Meeting 8,#ED4848
+2016-10-05,,CM9,Client Meeting 9,#ED4848
 2016-05-11,,SP1,Planning 1,#ED4848
 2016-05-25,,SR1,Review 1,#ED4848
 2016-05-25,,SP2,Planning 2,#ED4848
@@ -81,6 +84,18 @@ start,end,label,activities,fill
 2016-06-27,,SP4,Planning 4,#ED4848
 2016-07-11,,SR4,Review 4,#ED4848
 2016-07-11,,SP5,Planning 5,#ED4848
+2016-07-25,,SR4,Review 5,#ED4848
+2016-07-25,,SP5,Planning 6,#ED4848
+2016-08-08,,SR4,Review 6,#ED4848
+2016-08-08,,SP5,Planning 7,#ED4848
+2016-08-22,,SR4,Review 7,#ED4848
+2016-08-22,,SP5,Planning 8,#ED4848
+2016-09-05,,SR4,Review 8,#ED4848
+2016-09-05,,SP5,Planning 9,#ED4848
+2016-09-19,,SR4,Review 9,#ED4848
+2016-09-19,,SP5,Planning 10,#ED4848
+2016-10-03,,SR4,Review 10,#ED4848
+2016-10-03,,SP5,Planning 11,#ED4848
 2016-05-15,,IS480 Start,,#669900
 2016-06-15,,Proposal Submission,,#669900
 2016-06-27,,SM1,Supervisor Meeting 1,#ED4848
