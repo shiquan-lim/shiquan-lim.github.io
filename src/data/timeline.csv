@@ -29,38 +29,38 @@ start,end,label,activities,fill
 2016-08-10,,UAT1,,#669900
 2016-08-08,2016-08-21,Sprint 7,,#F3DADA
 2016-08-08,2016-08-21,Aggregate Ranking Across Events,Under Cohorts module,#FFF2BB
-2016-08-08,2016-08-21,Integrated Statistic Dashboard View,Under Cohorts module,#FFF2BB
+2016-08-08,2016-08-21,Integrated Statistic Dashboard View (Cohorts),Under Cohorts module,#FFF2BB
+2016-08-08,2016-08-21,Dashboard View (Review),,#FFF2BB
+2016-08-08,2016-08-21,Graded Submission Review,,#FFF2BB
 2016-08-22,2016-09-04,Sprint 8,,#F3DADA
-2016-08-22,2016-09-04,Index Card Challenge,Under Student Challenge module,#FFF2BB
-2016-08-22,2016-09-04,Video Assessment Module,Under Student Challenge module,#FFF2BB
-2016-08-22,2016-09-04,Index Card Review,Under Admin-Review Event module,#FFF2BB
+2016-08-22,2016-09-04,Join Teams,,#FFF2BB
+2016-08-22,2016-09-04,Profile Update Challenge Creation,,#FFF2BB
+2016-08-22,2016-09-04,Profile Updating Challenge,,#FFF2BB
 2016-09-05,2016-09-18,Sprint 9,,#F3DADA
-2016-09-05,2016-09-18,Graded Submission Review,Under Admin-Review Event module,#FFF2BB
-2016-09-05,2016-09-18,Dashboard View,Under Admin-Review Event module,#FFF2BB
-2016-09-05,2016-09-18,Instructor Feedback Module,Under Admin-Review Event module,#FFF2BB
-2016-09-05,2016-09-18,Rank Based On Challenges,Under Ranking module,#FFF2BB
+2016-09-05,2016-09-18,Team Based Multiple Choice,,#FFF2BB
+2016-09-05,2016-09-18,Cohort Management,,#FFF2BB
+2016-09-05,2016-09-18,Cohort Assistants,,#FFF2BB
 2016-09-13,,UAT2,,#669900
 2016-09-19,2016-10-02,Sprint 10,,#F3DADA
-2016-09-19,2016-10-02,Challenge Unlocking,Under Challenge Support module,#FFF2BB
-2016-09-19,2016-10-02,Time Completion Challenge,Under Challenge Support Charts module,#FFF2BB
-2016-09-19,2016-10-02,Mentor Assignment,Under Challenge Support module,#FFF2BB
+2016-09-19,2016-10-02,Game Show Module,,#FFF2BB
+2016-09-19,2016-10-02,Rank Based on Challenges,,#FFF2BB
 2016-10-03,2016-10-16,Sprint 11,,#F3DADA
-2016-10-03,2016-10-16,Join Teams,Under Team Activity module,#FFF2BB
-2016-10-03,2016-10-16,Team Link Submission,Under Team Activity module,#FFF2BB
-2016-10-03,2016-10-16,Team Project Review,Under Team Activity module,#FFF2BB
+2016-10-03,2016-10-16,Instructor Feedback Module,,#FFF2BB
+2016-10-03,2016-10-16,Index Card Review,,#FFF2BB
+2016-10-03,2016-10-16,Question Queue,,#FFF2BB
+2016-10-03,2016-10-16,Team Based Index Cards,,#FFF2BB
 2016-10-17,2016-10-30,Sprint 12,,#F3DADA
-2016-10-17,2016-10-30,Team Based Multiple Choice,Under Team Activity module,#FFF2BB
-2016-10-17,2016-10-30,Team Based Index Card,Under Team Activity module,#FFF2BB
+2016-10-17,2016-10-30,Mentor Assignment,,#FFF2BB
+2016-10-17,2016-10-30,Challenge Unlocking,,#FFF2BB
+2016-10-17,2016-10-30,Time Completion Challenge,,#FFF2BB
+2016-10-17,2016-10-30,Collaborative Submission,,#FFF2BB
 2016-10-31,2016-11-13,Sprint 13,,#F3DADA
-2016-10-31,2016-11-13,Challenge Tournament,Under Team Activity module,#FFF2BB
-2016-10-31,2016-11-13,Game Show Module,Under Team Activity module,#FFF2BB
-2016-10-31,2016-11-13,Service Registration Challenge,Under Service Integration module,#FFF2BB
-2016-10-31,2016-11-13,Minimum Achievements Challenge,Under Service Integration module,#FFF2BB
+2016-10-31,2016-11-13,Participant Submission View,,#FFF2BB
+2016-10-31,2016-11-13,Cooperative Submission,,#FFF2BB
 2016-11-07,,UAT3,,#669900
 2016-11-14,2016-11-27,Sprint 14,,#F3DADA
-2016-11-14,2016-11-27,Stochastic Performance Prediction,Under Analytics module,#FFF2BB
-2016-11-14,2016-11-27,Performance Trend Analysis,Under Analytics module,#FFF2BB
-2016-11-28,2016-12-02,Sprint 15,Reserved for task push backs,#F3DADA
+2016-11-14,2016-11-27,Necessary Badges Recommendation,,#FFF2BB
+2016-11-14,2016-11-27,Achievement Exploration,,#FFF2BB
 2016-07-07,,Merge 1,,#669900
 2016-07-22,,Merge 2,,#669900
 2016-08-01,,Merge 3,,#669900
