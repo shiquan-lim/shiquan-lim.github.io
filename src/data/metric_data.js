@@ -1,7 +1,7 @@
 function getFeatureData() {
 	return {
-		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6, 0.8, 1, 1], 
-		"Ideal": [1,1,1,1,1,1,1,1,1,1,1]
+		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6, 0.8, 1, 1, 1, 1], 
+		"Ideal": [1,1,1,1,1,1,1,1,1,1,1,1,1]
 	};
 }
 function getMetricData() {
@@ -531,6 +531,102 @@ function getMetricData() {
 				{
 					"type": "score",
 					"count": 20
+				}
+			]
+		},
+		{
+			"sprint": 12,
+			"members": [
+				{
+					"name": "Amos",
+					"planned": 24,
+					"actual": 19
+				},
+				{
+					"name": "Gideon",
+					"planned": 22,
+					"actual": 24
+				},
+				{
+					"name": "Kuan Yong",
+					"planned": 22,
+					"actual": 19
+				},
+				{
+					"name": "Sheryl",
+					"planned": 22,
+					"actual": 21
+				},
+				{
+					"name": "Shi Quan",
+					"planned": 24,
+					"actual": 24
+				}
+			],
+			"bugs": [
+				{
+					"type": "critical",
+					"count": 0
+				},
+				{
+					"type": "high",
+					"count": 7
+				},
+				{
+					"type": "low",
+					"count": 10
+				},
+				{
+					"type": "score",
+					"count": 17
+				}
+			]
+		},
+		{
+			"sprint": 13,
+			"members": [
+				{
+					"name": "Amos",
+					"planned": 24,
+					"actual": 21
+				},
+				{
+					"name": "Gideon",
+					"planned": 22,
+					"actual": 25
+				},
+				{
+					"name": "Kuan Yong",
+					"planned": 22,
+					"actual": 21
+				},
+				{
+					"name": "Sheryl",
+					"planned": 22,
+					"actual": 22
+				},
+				{
+					"name": "Shi Quan",
+					"planned": 24,
+					"actual": 28
+				}
+			],
+			"bugs": [
+				{
+					"type": "critical",
+					"count": 0
+				},
+				{
+					"type": "high",
+					"count": 8
+				},
+				{
+					"type": "low",
+					"count": 6
+				},
+				{
+					"type": "score",
+					"count": 14
 				}
 			]
 		}
