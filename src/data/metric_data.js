@@ -1,7 +1,7 @@
 function getFeatureData() {
 	return {
-		"Ideal": [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6, 0.8, 1, 1, 1, 1, 1]
+		"Feature Metrics": [1, 1, 0.7, 1.12, 1.1, 1, 1.1, 0.6, 0.8, 1, 1, 1, 1, 1],
+		"Ideal": [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	};
 }
 function getMetricData() {
