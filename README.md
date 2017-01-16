@@ -1,2 +1,2 @@
 # shiquan-lim.github.io
-Charts and models for Marksmen's Classmentors project
+Web host for my static projects
