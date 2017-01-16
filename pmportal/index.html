@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Classmentors Project Descriptive Models</title>
+</head>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<!-- <script src="chartpopup.js"></script> -->
+<link rel="stylesheet" type="text/css" href="src/styles/bootstrap-3.3.6-dist/css/bootstrap.css">
+  <script src="lib/jquery-2.2.3.js"></script>
+  <script src="src/styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+  <script src="src/styles/bootbox.js"></script>
+  <link rel="stylesheet" class="button" href="src/styles/button.css"/>
+<meta charset="utf-8">
+<style>
+
+.node circle {
+  cursor: pointer;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+line.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+<div class="container">
+  <div class="jumbotron">
+    <img class="img-responsive center-block" src="images/marksmen-logo.png"></br>
+    <h2 class="text-center">Classmentors Project Management Models v2</h2>
+    <p class="text-center">A simple web-app showcasing important information for team Marksmen's IS480 project. The project revolves around expanding and improving the Classmentors web portal envisioned and built by Professor Chris Boesch</p></div>
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="text-center">Project Timeline</h3>
+      <p class="text-center">Shows important events and milestones, </br>as well as iteration durations.</p>
+      <p class="text-center"><a href="src/page/timeline.html" class="button">View Project Timeline</a></p>
+      
+          </div>
+    <!-- <div class="col-sm-4">
+      <h3 class="text-center">Project Scope</h3>
+      <p class="text-center">View functional models that will be </br>implemented into the classmentors web portal</p>
+      <p class="text-center"><a href="src/page/scope.html" class="button">View Project Scope</a></p>
+    </div> -->
+    <div class="col-sm-6">
+      <h3 class="text-center">Project Metrics</h3>
+      <p class="text-center">View a range of project metrics by selected time periods</br> Model still in beta.</p>
+      <p class="text-center"><a href="src/page/metrics.html" class="button">View Project Metrics</a></p>
+    </div>
+  </div>
+</div>
+
+<div id="chart" style="width:800px;"></div>
+<script>
+      function captureInput(){
+        var metaDataString = document.getElementById('chartSelection').value;
+        //The alerts are just to test that the textarea input was entered correctly, as it sometimes behaves oddly
+        //alert(dataString);
+
+        //Convert input strings to JSON objects
+        var metaDataObject = format(metaDataString);
+        var dataObject = format(dataString);
+
+        // alert(dataObject);
+        chart=renderScope();
+      }
+
+      window.onload = run();
+    </script>
+</body>
+</html>
