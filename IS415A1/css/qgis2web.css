@@ -22,7 +22,9 @@ th {
     background: #fff;
 }
 .leaflet-popup-content {
-    width:auto !important;
+    min-width: 100px;
+    /*width:auto !important;*/
+    width: auto;
 }
 .leaflet-tooltip {
     background: none;

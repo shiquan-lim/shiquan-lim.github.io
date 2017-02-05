@@ -13,7 +13,7 @@ L.Control.Pan = L.Control.extend({
 						, container, map, new L.Point(    0 , -off));
 		this._panButton('Left' , className + '-left' 
 						, container, map, new L.Point( -off ,  0));
-		this._panButton('Right', className + '-right'
+		this._panButton('Right!', className + '-right'
 						, container, map, new L.Point(  off ,  0));
 		this._panButton('Down' , className + '-down'
 						, container, map, new L.Point(    0 ,  off));
