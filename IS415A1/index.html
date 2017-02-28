@@ -12,8 +12,6 @@
         <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="css/leaflet.draw.css" />
         <link rel="stylesheet" href="css/leaflet.measurecontrol.css" />
-        <link rel="stylesheet" href="css/L.Control.Pan.css" />
-        <link rel="stylesheet" href="css/leaflet.magnifyingglass.css" />
         <style>
         html, body, #map {
             width: 100%;
@@ -27,21 +25,20 @@
     <body>
         <div id="map">
         </div>
-        <script src="js/leaflet.js"></script>
-        <script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet-heat.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/OSMBuildings-Leaflet.js"></script>
-        <script src="js/leaflet.magnifyingglass.js"></script>
         <script src="js/leaflet-hash.js"></script>
-        <script src="js/L.Control.Pan.js"></script>
         <script src="js/Autolinker.min.js"></script>
         <script src="js/leaflet.draw.js"></script>
+        <script src="js/leaflet.measurecontrol.js"></script>
         <script src="js/leaflet.markercluster.js"></script>
-        <script src="data/SchoolCoverage0.js"></script>
-        <script src="data/SchMRTBool1.js"></script>
-        <script src="data/MRTLRTStnPtt2.js"></script>
-        <script src="data/schoolinfo3.js"></script>
+        <script src="data/splitcatchment0.js"></script>
+        <script src="data/SUBZONEAGES1.js"></script>
+        <script src="data/schoolinfopoints2.js"></script>
+        <script src="data/MRTLRTStnPtt3.js"></script>
+        <script src="data/SchMRTBool4.js"></script>
         <script>
         L.ImageOverlay.include({
             getBounds: function () {
@@ -51,32 +48,23 @@
         var map = L.map('map', {
             measureControl:true,
             zoomControl:true, maxZoom:28, minZoom:11
-        }).fitBounds([[1.176129297,103.570851112],[1.53283119642,104.077803172]]);
+        }).fitBounds([[0.907536448646,103.247200219],[1.67831062506,104.3426196]]);
         var hash = new L.Hash(map);
         map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
-        // L.control.locate().addTo(map);
-        // L.control.pan().addTo(map);
+        L.control.locate().addTo(map);
         var feature_group = new L.featureGroup([]);
         var bounds_group = new L.featureGroup([]);
         var raster_group = new L.LayerGroup([]);
         var basemap0 = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 28
         });
         basemap0.addTo(map);
         var basemap1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
             maxZoom: 28
         });
         basemap1.addTo(map);
-
-        // var magnifyingGlass = L.magnifyingGlass({
-        //     layers: [
-        //         basemap0
-        //     ],
-        //     fixedZoom: 5,
-        //     radius: 150
-        // });
-        // magnifyingGlass.addTo(map);
-
         function setBounds() {
             map.setMaxBounds(map.getBounds());
         }
@@ -89,13 +77,19 @@
             ];
           });
         }
-        function pop_SchoolCoverage0(feature, layer) {
+        function pop_splitcatchment0(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>School Catchment Area</strong></td>\
+                        <td colspan="2">' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>School Name</strong><br />' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['cluster'] !== null ? Autolinker.link(String(feature.properties['cluster'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['level_of_e'] !== null ? Autolinker.link(String(feature.properties['level_of_e'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['field_4'] !== null ? Autolinker.link(String(feature.properties['field_4'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['address'] !== null ? Autolinker.link(String(feature.properties['address'])) : '') + '</td>\
@@ -104,100 +98,392 @@
                         <td colspan="2">' + (feature.properties['postal_cod'] !== null ? Autolinker.link(String(feature.properties['postal_cod'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Education Level</strong><br />' + (feature.properties['level_of_e'] !== null ? Autolinker.link(String(feature.properties['level_of_e'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['XCOORD'] !== null ? Autolinker.link(String(feature.properties['XCOORD'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row"># of Primary School Aged Children</th>\
-                        <td>' + (feature.properties['sumPriSchA'] !== null ? Autolinker.link(String(feature.properties['sumPriSchA'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['YCOORD'] !== null ? Autolinker.link(String(feature.properties['YCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT_Bo'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT_Bo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__1'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__2'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__3'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__3'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__4'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__4'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__5'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__5'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__6'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__6'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__7'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__7'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumXCOORD'] !== null ? Autolinker.link(String(feature.properties['sumXCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumYCOORD'] !== null ? Autolinker.link(String(feature.properties['sumYCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumSch_MRT'] !== null ? Autolinker.link(String(feature.properties['sumSch_MRT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumSch_M_1'] !== null ? Autolinker.link(String(feature.properties['sumSch_M_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumOBJECTI'] !== null ? Autolinker.link(String(feature.properties['sumOBJECTI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumTOTAL'] !== null ? Autolinker.link(String(feature.properties['sumTOTAL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET0TO4'] !== null ? Autolinker.link(String(feature.properties['sumBET0TO4'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET5TO9'] !== null ? Autolinker.link(String(feature.properties['sumBET5TO9'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET10TO'] !== null ? Autolinker.link(String(feature.properties['sumBET10TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET15TO'] !== null ? Autolinker.link(String(feature.properties['sumBET15TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET20TO'] !== null ? Autolinker.link(String(feature.properties['sumBET20TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET25TO'] !== null ? Autolinker.link(String(feature.properties['sumBET25TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET30TO'] !== null ? Autolinker.link(String(feature.properties['sumBET30TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET35TO'] !== null ? Autolinker.link(String(feature.properties['sumBET35TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET40TO'] !== null ? Autolinker.link(String(feature.properties['sumBET40TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET45TO'] !== null ? Autolinker.link(String(feature.properties['sumBET45TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET50TO'] !== null ? Autolinker.link(String(feature.properties['sumBET50TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET55TO'] !== null ? Autolinker.link(String(feature.properties['sumBET55TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET60TO'] !== null ? Autolinker.link(String(feature.properties['sumBET60TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET65TO'] !== null ? Autolinker.link(String(feature.properties['sumBET65TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET70TO'] !== null ? Autolinker.link(String(feature.properties['sumBET70TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET75TO'] !== null ? Autolinker.link(String(feature.properties['sumBET75TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumBET80TO'] !== null ? Autolinker.link(String(feature.properties['sumBET80TO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumOVER85'] !== null ? Autolinker.link(String(feature.properties['sumOVER85'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumX_ADDR'] !== null ? Autolinker.link(String(feature.properties['sumX_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumY_ADDR'] !== null ? Autolinker.link(String(feature.properties['sumY_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumSHAPE_L'] !== null ? Autolinker.link(String(feature.properties['sumSHAPE_L'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumSHAPE_A'] !== null ? Autolinker.link(String(feature.properties['sumSHAPE_A'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumunion_a'] !== null ? Autolinker.link(String(feature.properties['sumunion_a'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sumunion_P'] !== null ? Autolinker.link(String(feature.properties['sumunion_P'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['count'] !== null ? Autolinker.link(String(feature.properties['count'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent);
         }
 
-        function style_SchoolCoverage0(feature) {
-            if (feature.properties['sumPriSchA'] >= 1900.000000 && feature.properties['sumPriSchA'] <= 8822.000000 ) {
+        function style_splitcatchment0(feature) {
+            if (feature.properties['sumunion_P'] >= 0.000000 && feature.properties['sumunion_P'] <= 16467.600000 ) {
                 return {
-                pane: 'pane_SchoolCoverage0',
+                pane: 'pane_splitcatchment0',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
+                color: 'rgba(0,0,0,0.71)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 1,
-                fillColor: 'rgba(247,251,255,0.7)',
+                fillColor: 'rgba(247,251,255,0.71)',
             }
             }
-            if (feature.properties['sumPriSchA'] >= 8822.000000 && feature.properties['sumPriSchA'] <= 15744.000000 ) {
+            if (feature.properties['sumunion_P'] >= 16467.600000 && feature.properties['sumunion_P'] <= 32935.200000 ) {
                 return {
-                pane: 'pane_SchoolCoverage0',
+                pane: 'pane_splitcatchment0',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
+                color: 'rgba(0,0,0,0.71)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 1,
-                fillColor: 'rgba(200,221,240,0.7)',
+                fillColor: 'rgba(200,221,240,0.71)',
             }
             }
-            if (feature.properties['sumPriSchA'] >= 15744.000000 && feature.properties['sumPriSchA'] <= 22666.000000 ) {
+            if (feature.properties['sumunion_P'] >= 32935.200000 && feature.properties['sumunion_P'] <= 49402.800000 ) {
                 return {
-                pane: 'pane_SchoolCoverage0',
+                pane: 'pane_splitcatchment0',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
+                color: 'rgba(0,0,0,0.71)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 1,
-                fillColor: 'rgba(115,179,216,0.7)',
+                fillColor: 'rgba(115,179,216,0.71)',
             }
             }
-            if (feature.properties['sumPriSchA'] >= 22666.000000 && feature.properties['sumPriSchA'] <= 29588.000000 ) {
+            if (feature.properties['sumunion_P'] >= 49402.800000 && feature.properties['sumunion_P'] <= 65870.400000 ) {
                 return {
-                pane: 'pane_SchoolCoverage0',
+                pane: 'pane_splitcatchment0',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
+                color: 'rgba(0,0,0,0.71)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 1,
-                fillColor: 'rgba(40,121,185,0.7)',
+                fillColor: 'rgba(40,121,185,0.71)',
             }
             }
-            if (feature.properties['sumPriSchA'] >= 29588.000000 && feature.properties['sumPriSchA'] <= 36510.000000 ) {
+            if (feature.properties['sumunion_P'] >= 65870.400000 && feature.properties['sumunion_P'] <= 82338.000000 ) {
                 return {
-                pane: 'pane_SchoolCoverage0',
+                pane: 'pane_splitcatchment0',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
+                color: 'rgba(0,0,0,0.71)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fillOpacity: 1,
-                fillColor: 'rgba(8,48,107,0.7)',
+                fillColor: 'rgba(8,48,107,0.71)',
             }
             }
         }
-        map.createPane('pane_SchoolCoverage0');
-        map.getPane('pane_SchoolCoverage0').style.zIndex = 600;
-        map.getPane('pane_SchoolCoverage0').style['mix-blend-mode'] = 'normal';
-    var layer_SchoolCoverage0 = new L.geoJson(json_SchoolCoverage0, {
-        pane: 'pane_SchoolCoverage0',
-        onEachFeature: pop_SchoolCoverage0,
-        style: style_SchoolCoverage0
+        map.createPane('pane_splitcatchment0');
+        map.getPane('pane_splitcatchment0').style.zIndex = 600;
+        map.getPane('pane_splitcatchment0').style['mix-blend-mode'] = 'normal';
+    var layer_splitcatchment0 = new L.geoJson(json_splitcatchment0, {
+        pane: 'pane_splitcatchment0',
+        onEachFeature: pop_splitcatchment0,
+        style: style_splitcatchment0
     });
-        bounds_group.addLayer(layer_SchoolCoverage0);
-        feature_group.addLayer(layer_SchoolCoverage0);
-        function pop_SchMRTBool1(feature, layer) {
+        bounds_group.addLayer(layer_splitcatchment0);
+        feature_group.addLayer(layer_splitcatchment0);
+        function pop_SUBZONEAGES1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>School Accessibility Rubrick</strong></td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>School Name</strong><br />' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['SUBZONE_N'] !== null ? Autolinker.link(String(feature.properties['SUBZONE_N'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLN_AREA_N'] !== null ? Autolinker.link(String(feature.properties['PLN_AREA_N'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TOTAL'] !== null ? Autolinker.link(String(feature.properties['TOTAL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET0TO4'] !== null ? Autolinker.link(String(feature.properties['BET0TO4'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET5TO9'] !== null ? Autolinker.link(String(feature.properties['BET5TO9'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET10TO14'] !== null ? Autolinker.link(String(feature.properties['BET10TO14'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET15TO19'] !== null ? Autolinker.link(String(feature.properties['BET15TO19'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET20TO24'] !== null ? Autolinker.link(String(feature.properties['BET20TO24'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET25TO29'] !== null ? Autolinker.link(String(feature.properties['BET25TO29'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET30TO34'] !== null ? Autolinker.link(String(feature.properties['BET30TO34'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET35TO39'] !== null ? Autolinker.link(String(feature.properties['BET35TO39'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET40TO44'] !== null ? Autolinker.link(String(feature.properties['BET40TO44'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET45TO49'] !== null ? Autolinker.link(String(feature.properties['BET45TO49'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET50TO54'] !== null ? Autolinker.link(String(feature.properties['BET50TO54'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET55TO59'] !== null ? Autolinker.link(String(feature.properties['BET55TO59'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET60TO64'] !== null ? Autolinker.link(String(feature.properties['BET60TO64'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET65TO69'] !== null ? Autolinker.link(String(feature.properties['BET65TO69'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET70TO74'] !== null ? Autolinker.link(String(feature.properties['BET70TO74'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET75TO79'] !== null ? Autolinker.link(String(feature.properties['BET75TO79'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BET80TO84'] !== null ? Autolinker.link(String(feature.properties['BET80TO84'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OVER85'] !== null ? Autolinker.link(String(feature.properties['OVER85'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INC_CRC'] !== null ? Autolinker.link(String(feature.properties['INC_CRC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FMEL_UPD_D'] !== null ? Autolinker.link(String(feature.properties['FMEL_UPD_D'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['X_ADDR'] !== null ? Autolinker.link(String(feature.properties['X_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Y_ADDR'] !== null ? Autolinker.link(String(feature.properties['Y_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? Autolinker.link(String(feature.properties['SHAPE_Leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? Autolinker.link(String(feature.properties['SHAPE_Area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PriSchAge'] !== null ? Autolinker.link(String(feature.properties['PriSchAge'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_SUBZONEAGES1(feature) {
+            if (feature.properties['PriSchAge'] >= 0.000000 && feature.properties['PriSchAge'] <= 690.000000 ) {
+                return {
+                pane: 'pane_SUBZONEAGES1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(247,251,255,1.0)',
+            }
+            }
+            if (feature.properties['PriSchAge'] >= 690.000000 && feature.properties['PriSchAge'] <= 2100.000000 ) {
+                return {
+                pane: 'pane_SUBZONEAGES1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(200,221,240,1.0)',
+            }
+            }
+            if (feature.properties['PriSchAge'] >= 2100.000000 && feature.properties['PriSchAge'] <= 4490.000000 ) {
+                return {
+                pane: 'pane_SUBZONEAGES1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(115,179,216,1.0)',
+            }
+            }
+            if (feature.properties['PriSchAge'] >= 4490.000000 && feature.properties['PriSchAge'] <= 7700.000000 ) {
+                return {
+                pane: 'pane_SUBZONEAGES1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(40,121,185,1.0)',
+            }
+            }
+            if (feature.properties['PriSchAge'] >= 7700.000000 && feature.properties['PriSchAge'] <= 12690.000000 ) {
+                return {
+                pane: 'pane_SUBZONEAGES1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(8,48,107,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_SUBZONEAGES1');
+        map.getPane('pane_SUBZONEAGES1').style.zIndex = 601;
+        map.getPane('pane_SUBZONEAGES1').style['mix-blend-mode'] = 'normal';
+    var layer_SUBZONEAGES1 = new L.geoJson(json_SUBZONEAGES1, {
+        pane: 'pane_SUBZONEAGES1',
+        onEachFeature: pop_SUBZONEAGES1,
+        style: style_SUBZONEAGES1
+    });
+        bounds_group.addLayer(layer_SUBZONEAGES1);
+        feature_group.addLayer(layer_SUBZONEAGES1);
+        function pop_schoolinfopoints2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cluster'] !== null ? Autolinker.link(String(feature.properties['cluster'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['level_of_e'] !== null ? Autolinker.link(String(feature.properties['level_of_e'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['field_4'] !== null ? Autolinker.link(String(feature.properties['field_4'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['address'] !== null ? Autolinker.link(String(feature.properties['address'])) : '') + '</td>\
@@ -206,58 +492,202 @@
                         <td colspan="2">' + (feature.properties['postal_cod'] !== null ? Autolinker.link(String(feature.properties['postal_cod'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>Education Level</strong><br />' + (feature.properties['level_of_e'] !== null ? Autolinker.link(String(feature.properties['level_of_e'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['XCOORD'] !== null ? Autolinker.link(String(feature.properties['XCOORD'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row"># of MRT stations in walkable distance</th>\
-                        <td>' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(String(feature.properties['NUMPOINTS'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['YCOORD'] !== null ? Autolinker.link(String(feature.properties['YCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT_Bo'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT_Bo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__1'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__2'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__3'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__3'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__4'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__4'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__5'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__5'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__6'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__6'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Sch_MRT__7'] !== null ? Autolinker.link(String(feature.properties['Sch_MRT__7'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent);
         }
 
-        function style_SchMRTBool1(feature) {
-            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 0.000000 ) {
-                return {
-                pane: 'pane_SchMRTBool1',
-                opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,178,0.7)',
+        function style_schoolinfopoints2(feature) {
+            switch(feature.properties['Sch_MRT__7']) {
+                case '0':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
             }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
             }
-            if (feature.properties['NUMPOINTS'] >= 0.000000 && feature.properties['NUMPOINTS'] <= 7.000000 ) {
-                return {
-                pane: 'pane_SchMRTBool1',
-                opacity: 1,
-                color: 'rgba(0,0,0,0.7)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fillOpacity: 1,
-                fillColor: 'rgba(189,0,38,0.7)',
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
             }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
+                case '':
+                    return {
+                pane: 'pane_schoolinfopoints2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/education_school.svg',
+            iconSize: [19.0, 19.0]
+        }),
+            }
+                    break;
             }
         }
-        map.createPane('pane_SchMRTBool1');
-        map.getPane('pane_SchMRTBool1').style.zIndex = 601;
-        map.getPane('pane_SchMRTBool1').style['mix-blend-mode'] = 'normal';
-    var layer_SchMRTBool1 = new L.geoJson(json_SchMRTBool1, {
-        pane: 'pane_SchMRTBool1',
-        onEachFeature: pop_SchMRTBool1,
-        style: style_SchMRTBool1
-    });
-        bounds_group.addLayer(layer_SchMRTBool1);
-        feature_group.addLayer(layer_SchMRTBool1);
-        function pop_MRTLRTStnPtt2(feature, layer) {
+        map.createPane('pane_schoolinfopoints2');
+        map.getPane('pane_schoolinfopoints2').style.zIndex = 602;
+        map.getPane('pane_schoolinfopoints2').style['mix-blend-mode'] = 'normal';
+        var layer_schoolinfopoints2 = new L.geoJson(json_schoolinfopoints2, {
+            pane: 'pane_schoolinfopoints2',
+            onEachFeature: pop_schoolinfopoints2,
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, style_schoolinfopoints2(feature))
+            }
+        });
+        bounds_group.addLayer(layer_schoolinfopoints2);
+        feature_group.addLayer(layer_schoolinfopoints2);
+        function pop_MRTLRTStnPtt3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Station Information</strong></td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2"><strong>STN_NAME</strong><br />' + (feature.properties['STN_NAME'] !== null ? Autolinker.link(String(feature.properties['STN_NAME'])) : '') + '</td>\
@@ -269,9 +699,9 @@
             layer.bindPopup(popupContent);
         }
 
-        function style_MRTLRTStnPtt2() {
+        function style_MRTLRTStnPtt3() {
             return {
-                pane: 'pane_MRTLRTStnPtt2',
+                pane: 'pane_MRTLRTStnPtt3',
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
@@ -280,25 +710,22 @@
         }),
             }
         }
-        map.createPane('pane_MRTLRTStnPtt2');
-        map.getPane('pane_MRTLRTStnPtt2').style.zIndex = 602;
-        map.getPane('pane_MRTLRTStnPtt2').style['mix-blend-mode'] = 'normal';
-        var layer_MRTLRTStnPtt2 = new L.geoJson(json_MRTLRTStnPtt2, {
-            pane: 'pane_MRTLRTStnPtt2',
-            onEachFeature: pop_MRTLRTStnPtt2,
+        map.createPane('pane_MRTLRTStnPtt3');
+        map.getPane('pane_MRTLRTStnPtt3').style.zIndex = 603;
+        map.getPane('pane_MRTLRTStnPtt3').style['mix-blend-mode'] = 'normal';
+        var layer_MRTLRTStnPtt3 = new L.geoJson(json_MRTLRTStnPtt3, {
+            pane: 'pane_MRTLRTStnPtt3',
+            onEachFeature: pop_MRTLRTStnPtt3,
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, style_MRTLRTStnPtt2(feature))
+                return L.marker(latlng, style_MRTLRTStnPtt3(feature))
             }
         });
-        bounds_group.addLayer(layer_MRTLRTStnPtt2);
-        feature_group.addLayer(layer_MRTLRTStnPtt2);
-        function pop_schoolinfo3(feature, layer) {
+        bounds_group.addLayer(layer_MRTLRTStnPtt3);
+        feature_group.addLayer(layer_MRTLRTStnPtt3);
+        function pop_SchMRTBool4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>School Information</strong></td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>School Name</strong><br />' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['all_school'] !== null ? Autolinker.link(String(feature.properties['all_school'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['cluster'] !== null ? Autolinker.link(String(feature.properties['cluster'])) : '') + '</td>\
@@ -307,57 +734,54 @@
                         <td colspan="2">' + (feature.properties['level_of_e'] !== null ? Autolinker.link(String(feature.properties['level_of_e'])) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <td colspan="2">' + (feature.properties['field_4'] !== null ? Autolinker.link(String(feature.properties['field_4'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['address'] !== null ? Autolinker.link(String(feature.properties['address'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['postal_cod'] !== null ? Autolinker.link(String(feature.properties['postal_cod'])) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['XCOORD'] !== null ? Autolinker.link(String(feature.properties['XCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['YCOORD'] !== null ? Autolinker.link(String(feature.properties['YCOORD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMPOINTS'] !== null ? Autolinker.link(String(feature.properties['NUMPOINTS'])) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent);
         }
 
-        function style_schoolinfo3(feature) {
-            switch(feature.properties['level_of_e']) {
-                case 'Mixed Level Schools':
-                    return {
-                pane: 'pane_schoolinfo3',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/education_school.svg',
-            iconSize: [19.0, 19.0]
-        }),
-            }
-                    break;
-                case 'Primary Schools (Excluding Mixed Level Schools)':
-                    return {
-                pane: 'pane_schoolinfo3',
-        rotationAngle: 0.0,
-        rotationOrigin: 'center center',
-        icon: L.icon({
-            iconUrl: 'markers/education_school.svg',
-            iconSize: [19.0, 19.0]
-        }),
-            }
-                    break;
+        function style_SchMRTBool4() {
+            return {
+                pane: 'pane_SchMRTBool4',
+                opacity: 1,
+                color: 'rgba(182,7,39,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(164,105,117,1.0)',
             }
         }
-        map.createPane('pane_schoolinfo3');
-        map.getPane('pane_schoolinfo3').style.zIndex = 603;
-        map.getPane('pane_schoolinfo3').style['mix-blend-mode'] = 'normal';
-        var layer_schoolinfo3 = new L.geoJson(json_schoolinfo3, {
-            pane: 'pane_schoolinfo3',
-            onEachFeature: pop_schoolinfo3,
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, style_schoolinfo3(feature))
-            }
-        });
-        bounds_group.addLayer(layer_schoolinfo3);
-        feature_group.addLayer(layer_schoolinfo3);
+        map.createPane('pane_SchMRTBool4');
+        map.getPane('pane_SchMRTBool4').style.zIndex = 604;
+        map.getPane('pane_SchMRTBool4').style['mix-blend-mode'] = 'normal';
+    var layer_SchMRTBool4 = new L.geoJson(json_SchMRTBool4, {
+        pane: 'pane_SchMRTBool4',
+        onEachFeature: pop_SchMRTBool4,
+        style: style_SchMRTBool4
+    });
+        bounds_group.addLayer(layer_SchMRTBool4);
+        feature_group.addLayer(layer_SchMRTBool4);
         raster_group.addTo(map);
         feature_group.addTo(map);
         var baseMaps = {'OSM B&W': basemap0, 'OSM': basemap1};
-        L.control.layers(baseMaps,{'Schools<br /><table><tr><td style="text-align: center;"><img src="legend/schoolinfo3_MixedLevelSchools0.png" /></td><td>Primary Schools</td></tr></table>': layer_schoolinfo3,'<img src="legend/MRTLRTStnPtt2.png" /> MRT Stations': layer_MRTLRTStnPtt2,'School Accessibility by MRT<br /><table><tr><td style="text-align: center;"><img src="legend/SchMRTBool1_0MRTS0.png" /></td><td>0 MRTS</td></tr><tr><td style="text-align: center;"><img src="legend/SchMRTBool1_1ormoreMRTS1.png" /></td><td>1 or more MRTS</td></tr></table>': layer_SchMRTBool1,'School to Population Coverage<br /><table><tr><td style="text-align: center;"><img src="legend/SchoolCoverage0_19000000882200000.png" /></td><td> 1900 - 8822 Children </td></tr><tr><td style="text-align: center;"><img src="legend/SchoolCoverage0_882200001574400001.png" /></td><td> 8822 - 15744 Children </td></tr><tr><td style="text-align: center;"><img src="legend/SchoolCoverage0_1574400002266600002.png" /></td><td> 15744 - 22666 Children </td></tr><tr><td style="text-align: center;"><img src="legend/SchoolCoverage0_2266600002958800003.png" /></td><td> 22666 - 29588 Children </td></tr><tr><td style="text-align: center;"><img src="legend/SchoolCoverage0_2958800003651000004.png" /></td><td> 29588 - 36510 Children </td></tr></table>': layer_SchoolCoverage0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/SchMRTBool4.png" /> Sch_MRT_Bool': layer_SchMRTBool4,'<img src="legend/MRTLRTStnPtt3.png" /> MRTLRTStnPtt': layer_MRTLRTStnPtt3,'schoolinfo_points<br /><table><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_77.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_88.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_99.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_1010.png" /></td><td>10</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_1211.png" /></td><td>12</td></tr><tr><td style="text-align: center;"><img src="legend/schoolinfopoints2_12.png" /></td><td></td></tr></table>': layer_schoolinfopoints2,'SUBZONE_AGES<br /><table><tr><td style="text-align: center;"><img src="legend/SUBZONEAGES1_0000069000000.png" /></td><td> 0.0000 - 690.0000 </td></tr><tr><td style="text-align: center;"><img src="legend/SUBZONEAGES1_6900000210000001.png" /></td><td> 690.0000 - 2100.0000 </td></tr><tr><td style="text-align: center;"><img src="legend/SUBZONEAGES1_21000000449000002.png" /></td><td> 2100.0000 - 4490.0000 </td></tr><tr><td style="text-align: center;"><img src="legend/SUBZONEAGES1_44900000770000003.png" /></td><td> 4490.0000 - 7700.0000 </td></tr><tr><td style="text-align: center;"><img src="legend/SUBZONEAGES1_770000001269000004.png" /></td><td> 7700.0000 - 12690.0000 </td></tr></table>': layer_SUBZONEAGES1,'split_catchment<br /><table><tr><td style="text-align: center;"><img src="legend/splitcatchment0_000001646760000.png" /></td><td> 0.0000 - 16467.6000 </td></tr><tr><td style="text-align: center;"><img src="legend/splitcatchment0_1646760003293520001.png" /></td><td> 16467.6000 - 32935.2000 </td></tr><tr><td style="text-align: center;"><img src="legend/splitcatchment0_3293520004940280002.png" /></td><td> 32935.2000 - 49402.8000 </td></tr><tr><td style="text-align: center;"><img src="legend/splitcatchment0_4940280006587040003.png" /></td><td> 49402.8000 - 65870.4000 </td></tr><tr><td style="text-align: center;"><img src="legend/splitcatchment0_6587040008233800004.png" /></td><td> 65870.4000 - 82338.0000 </td></tr></table>': layer_splitcatchment0,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
