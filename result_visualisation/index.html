@@ -2,6 +2,12 @@
 <html>
 	<head>
 		<title>Simulation Results</title>
+		<script type="text/javascript">
+			function show_value(x)
+				{
+				 document.getElementById("slider_value").innerHTML= "Select Granularity: (" + x.toString() + ")";
+				}
+		</script>
 	</head>
 	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<link href="lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
@@ -56,49 +62,74 @@
 	</style>
 
 	<body>
-		<label for="division">Select Division:</label>
-		<select id="division" class="form-control">
-		  <option value="A">A</option>
-		  <option value="D">D</option>
-		  <option value="E">E</option>
-		  <option value="F">F</option>
-		  <option value="G">G</option>
-		  <option value="J">J</option>
-		</select>
-		<label for="kpi">Select KPI:</label>
-		<select id="kpi" class="form-control">
-		  <option value="alphas">Alphas (Risk)</option>  
-		  <option value="utlis">Utilisation Rates</option>
-		</select>
-		<label for="dft">Select Distribution Function Type:</label>
-		<select id="dft" class="form-control">
-		  <option value="cdf">Cumulative Distribution Function</option>
-		  <option value="pdf">Probability Density Function</option>  
-		</select>
-		<label for="grain">Select Granularity:</label>
-		<select id="grain" class="form-control">
-		  <option value="10">10</option>
-		  <option value="50">50</option> 
-		  <option value="100">100</option>
-		  <option value="500">500</option> 
-		  <option value="1000">1000</option>  
-		</select>
+		<form name="resultForm">
+				<b>Select result set to view:</b></br>
+				<input type="radio" value="overwrite" name="rChoice" checked> Synthetic data (0.3-525-365) simulation results<br>
+				<input type="radio" value="2014" name="rChoice"> 2014 Historical data simulation results<br>
+			<!-- </div> -->
+		</form>
+		<form class="form-inline">
+			<div class = "form-group">
+				<label for="division">Select Division:</label>
+				<select id="division" class="form-control">
+				  <option value="A">A</option>
+				  <option value="D">D</option>
+				  <option value="E">E</option>
+				  <option value="F">F</option>
+				  <option value="G">G</option>
+				  <option value="J">J</option>
+				</select>
+			</div>
+			<div class = "form-group">
+				<label for="kpi">Select KPI:</label>
+				<select id="kpi" class="form-control">
+				  <option value="alphas">Alphas (Risk)</option>  
+				  <option value="utlis">Utilisation Rates</option>
+				</select>
+			</div>
+		</form>
+		<form class="form-inline">
+			<label for="dft">Select Distribution Function Type:</label>
+			<select id="dft" class="form-control">
+			  <option value="cdf">Cumulative Distribution Function</option>
+			  <option value="pdf">Probability Density Function</option>  
+			</select>
+		</form>
+		<form class="form-inline">
+			<div class="form-group">
+				<label id="slider_value" for="grain">Select Granularity: (500)</label>
+				<input type="range" id="grain" min="10" max="500" step="10" class="form-control" value="500" onchange="show_value(this.value);">
+			</div>
+		</form>
 		<a href="#chart" type="button" id="submit" class="button" onclick="captureInput();">Submit</a>
 		<div class="loader" id="loader">loading...</div>
 		<div id="chart"></div>
 
 		<script type="text/javascript">
-			var allResults;
-			firebase.database().ref('/overwrite').once('value').then(function(snapshot) {
-		  		allResults = snapshot.val();
-				// console.log(allResults)
-				document.getElementById("loader").style.display = "none";
-			});
-			// firebase.database().ref('/').once('value').then(function(snapshot) {
-		 //  		allResults = snapshot.val();
-			// 	// console.log(allResults)
-			// 	document.getElementById("loader").style.display = "none";
-			// });
+			var rad = document.resultForm.rChoice;
+		    var prev = null;
+		    for(var i = 0; i < rad.length; i++) {
+		        rad[i].onclick = function() {
+		            // (prev)? console.log(prev.value):null;
+		            if(this !== prev) {
+		                prev = this;
+		            }
+		            loadResults(this.value)
+		        };
+		    }
+
+		    loadResults('overwrite');
+
+			function loadResults(choice) {
+				document.getElementById("loader").style.display = "initial";
+				console.log(choice);
+				firebase.database().ref('/'+choice).once('value').then(function(snapshot) {
+			  		allResults = snapshot.val();
+					// console.log(allResults)
+					document.getElementById("loader").style.display = "none";
+					captureInput();
+				});
+			}
 
 			function captureInput() {
 				document.getElementById("loader").style.display = "initial";
