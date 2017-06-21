@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Simulation Results</title>
+	</head>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<link href="lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+	<script src="lib/c3-0.4.11/c3.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+	<script src="lib/jquery-2.2.3.js"></script>
+	<script src="styles/chartpopup.js"></script>
+	<script src="plot.js"></script>
+	<script src="lib/jquery-2.2.3.js"></script>
+	<script src="styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	<script src="styles/bootbox.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap-3.3.6-dist/css/bootstrap.css">
+  	<link rel="stylesheet" class="button" href="styles/button.css"/>
+
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBYRKb17mrYuQbOnfHdrDJzWHXTbxIlWew",
+	    authDomain: "spf-simresults.firebaseapp.com",
+	    databaseURL: "https://spf-simresults.firebaseio.com",
+	    projectId: "spf-simresults",
+	    storageBucket: "spf-simresults.appspot.com",
+	    messagingSenderId: "1039000964780"
+	  };
+	  firebase.initializeApp(config);
+
+	  var database = firebase.database();
+	</script>
+
+	<style type="text/css">
+		.loader {
+		    position: absolute;
+		  left: 50%;
+		  top: 50%;
+		  z-index: 1;
+		  width: 150px;
+		  height: 150px;
+		  margin: -75px 0 0 -75px;
+		  border: 16px solid #f3f3f3;
+		  border-radius: 50%;
+		  border-top: 16px solid #3498db;
+		  width: 120px;
+		  height: 120px;
+		  -webkit-animation: spin 2s linear infinite;
+		  animation: spin 2s linear infinite;
+		}
+
+		@keyframes spin {
+		    0% { transform: rotate(0deg); }
+		    100% { transform: rotate(360deg); }
+		}
+	</style>
+
+	<body>
+		<label for="division">Select Division:</label>
+		<select id="division" class="form-control">
+		  <option value="A">A</option>
+		  <option value="D">D</option>
+		  <option value="E">E</option>
+		  <option value="F">F</option>
+		  <option value="G">G</option>
+		  <option value="J">J</option>
+		</select>
+		<label for="kpi">Select KPI:</label>
+		<select id="kpi" class="form-control">
+		  <option value="alphas">Alphas (Risk)</option>  
+		  <option value="utlis">Utilisation Rates</option>
+		</select>
+		<label for="dft">Select Distribution Function Type:</label>
+		<select id="dft" class="form-control">
+		  <option value="cdf">Cumulative Distribution Function</option>
+		  <option value="pdf">Probability Density Function</option>  
+		</select>
+		<label for="grain">Select Granularity:</label>
+		<select id="grain" class="form-control">
+		  <option value="10">10</option>
+		  <option value="50">50</option> 
+		  <option value="100">100</option>
+		  <option value="500">500</option> 
+		  <option value="1000">1000</option>  
+		</select>
+		<a href="#chart" type="button" id="submit" class="button" onclick="captureInput();">Submit</a>
+		<div class="loader" id="loader">loading...</div>
+		<div id="chart"></div>
+
+		<script type="text/javascript">
+			var allResults;
+			firebase.database().ref('/overwrite').once('value').then(function(snapshot) {
+		  		allResults = snapshot.val();
+				// console.log(allResults)
+				document.getElementById("loader").style.display = "none";
+			});
+			// firebase.database().ref('/').once('value').then(function(snapshot) {
+		 //  		allResults = snapshot.val();
+			// 	// console.log(allResults)
+			// 	document.getElementById("loader").style.display = "none";
+			// });
+
+			function captureInput() {
+				document.getElementById("loader").style.display = "initial";
+				var division = document.getElementById('division').value;
+				var kpi = document.getElementById('kpi').value;
+				var dft = document.getElementById('dft').value;
+				var grain = document.getElementById('grain').value;
+				chart=generateChart(allResults, division, kpi, dft, grain);
+				// console.log("Generating chart for " + division, kpi, dft)
+			}
+		</script>
+	</body>
+</html>
