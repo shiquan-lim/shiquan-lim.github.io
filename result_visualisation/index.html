@@ -64,7 +64,7 @@
 	<body>
 		<form name="resultForm">
 				<b>Select result set to view:</b></br>
-				<input type="radio" value="30525365" name="rChoice" checked> Synthetic data (0.3-525-365) simulation results<br>
+				<input type="radio" value="overwrite" name="rChoice" checked> Synthetic data (0.3-525-365) simulation results<br>
 				<input type="radio" value="2014" name="rChoice"> 2014 Historical data simulation results<br>
 			<!-- </div> -->
 		</form>
@@ -118,7 +118,7 @@
 		        };
 		    }
 
-		    loadResults('30525365');
+		    loadResults('overwrite');
 
 			function loadResults(choice) {
 				document.getElementById("loader").style.display = "initial";
