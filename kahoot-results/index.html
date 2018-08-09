@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KAHOOT RESULTS</title>
+    <!-- load c3 and d3 from local paths -->
+    <link href="./lib/c3-0.4.11/c3.min.css" rel="stylesheet" type="text/css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="./styles/chartpopup.js"></script>
+    <script src="./lib/c3-0.4.11/c3.min.js"></script>
+    <script src="./styles/chartpopup.js"></script>
+    <script src="./lib/jquery-2.2.3.js"></script>
+    <script src="./styles/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="./styles/bootbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <link rel="stylesheet" class="button" href="./styles/button.css"/>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" src="./lib/angular.min.js"></script>
+<div class="container">
+  <div class="jumbotron">
+    <img class="img-responsive center-block" src="http://www.aci-bd.com/assets/images/theme/seed.jpg"></br>
+    <h2 class="text-center">Quiz Results</h2>
+    <p class="text-center">Let's find out the winning group!</p>
+  </div>
+</div>
+<div class="container">
+<a href="#chart" type="button" id="submit" class="button" onclick="generateResults();">Get Results</a>
+<!-- <a href="#" onclick="captureInput()">Submit</a> -->
+</br>
+</div>
+
+</br>
+<div id="chart" align="center"></div>
+
+
+
+<script>
+  function generateResults() {
+    chart=generateChart();
+    return false;
+  }
+</script>
+
+</body>
+</html>
