@@ -68,7 +68,7 @@ function generateChart() {
 {name:"	DEV4 - JS	",score:	6184	},
 {name:"	Dev4 - Wang An	",score:	5376	},
 {name:"	Dev5-john	",score:	3955	},
-{name:"	Support JC	",score:	0	},
+{name:"	Support - JC	",score:	0	},
 ].map(function(i) {
   return {
     "name": i.name.trim(),
