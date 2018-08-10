@@ -1,9 +1,9 @@
 function generateChart() {
-  var data = [{name:"	DEV1 - SQ	",score:	19748	},
+  var data = [{name:"	DEV 1 - SQ	",score:	19748	},
 {name:"	DEV2 - Dude 1	",score:	12000	},
 {name:"	DEV1 - Dude 2	",score:	11000	},
 {name:"	DEV1 - Dude 3	",score:	13837	},
-{name:"	DEV2 - Dude 4	",score:	17892	},
+{name:"	dev2 - Dude 4	",score:	17892	},
 {name:"	DEV3 - Dude 5	",score:	18092	},
 {name:"	DEV3 - Dude 6	",score:	10293	},
 {name:"	DEV4 - Dude 7	",score:	14562	},].map(function(i) {
@@ -21,15 +21,15 @@ function generateChart() {
 
 var categories = [];
 for(var i = 0; i < data.length; i++) {
-  if(categories.indexOf(data[i].group) < 0) {
-    categories.push(data[i].group);
+  if(categories.indexOf(data[i].group.replace(/ /g,'').toUpperCase()) < 0) {
+    categories.push(data[i].group.replace(/ /g,'').toUpperCase());
   }
 }
 
   var scores = [];
   var colours = [];
   for(var i = 0; i < categories.length; i++) {
-    var groupScores = data.filter(x => x.group==categories[i]);
+    var groupScores = data.filter(x => x.group.replace(/ /g,'').toUpperCase()==categories[i]);
     var groupTotal = 0;
     for(var j = 0; j < groupScores.length; j++) {
       groupTotal += groupScores[j].score;
