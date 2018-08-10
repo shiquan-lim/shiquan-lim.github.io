@@ -1,7 +1,7 @@
 function generateChart() {
   var data = [{name:"	DEV 1 - SQ	",score:	19748	},
 {name:"	DEV2 - Dude 1	",score:	12000	},
-{name:"	DEV1 - Dude 2	",score:	11000	},
+{name:"	Dev 5 - Dude 2	",score:	11000	},
 {name:"	DEV1 - Dude 3	",score:	13837	},
 {name:"	dev2 - Dude 4	",score:	17892	},
 {name:"	DEV3 - Dude 5	",score:	18092	},
