@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ash and Mike Weight Tracker</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+		<style>
+			body {font-family: Arial, Helvetica, sans-serif;}
+			.loader {
+			  position: absolute;
+			  left: 50%;
+			  top: 50%;
+			  z-index: 1;
+			  width: 150px;
+			  height: 150px;
+			  margin: -75px 0 0 -75px;
+			  border: 16px solid #f3f3f3;
+			  border-radius: 50%;
+			  border-top: 16px solid #3498db;
+			  width: 120px;
+			  height: 120px;
+			  -webkit-animation: spin 2s linear infinite;
+			  animation: spin 2s linear infinite;
+			}
+
+			@keyframes spin {
+			  0% { transform: rotate(0deg); }
+			  100% { transform: rotate(360deg); }
+			}
+
+			/* The Modal (background) */
+			.modal {
+			  display: none; /* Hidden by default */
+			  position: fixed; /* Stay in place */
+			  z-index: 1; /* Sit on top */
+			  padding: 50px;
+			  left: 0;
+			  top: 0;
+			  width: 10%; /* Full width */
+			  height: 100%; /* Full height */
+			  overflow: auto; /* Enable scroll if needed */
+			  background-color: rgb(0,0,0); /* Fallback color */
+			  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content */
+			.modal-content {
+			  position: relative;
+			  background-color: #fefefe;
+			  margin: auto;
+			  padding: 0;
+			  border: 1px solid #888;
+			  width: 80%;
+			  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+			  -webkit-animation-name: animatetop;
+			  -webkit-animation-duration: 0.4s;
+			  animation-name: animatetop;
+			  animation-duration: 0.4s
+			}
+
+			/* Add Animation */
+			@-webkit-keyframes animatetop {
+			  from {top:-300px; opacity:0}
+			  to {top:0; opacity:1}
+			}
+
+			@keyframes animatetop {
+			  from {top:-300px; opacity:0}
+			  to {top:0; opacity:1}
+			}
+
+			/* The Close Button */
+			.close {
+			  color: white;
+			  float: right;
+			  font-size: 28px;
+			  font-weight: bold;
+			}
+
+			.close:hover,
+			.close:focus {
+			  color: #000;
+			  text-decoration: none;
+			  cursor: pointer;
+			}
+
+			.modal-header {
+			  padding: 2px 16px;
+			  background-color: #5cb85c;
+			  color: white;
+			}
+
+			.modal-body {padding: 2px 16px;}
+
+			.modal-footer {
+			  padding: 2px 16px;
+			  background-color: #5cb85c;
+			  color: white;
+			}
+		</style>
+	</head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  	<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+  	<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
+	<script>
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyDgdKbz3uK6L1ArCRdWHKBaFr6NuXemQ_M",
+	    authDomain: "mfmdb-9ddbc.firebaseapp.com",
+	    databaseURL: "https://mfmdb-9ddbc.firebaseio.com",
+	    projectId: "mfmdb-9ddbc",
+	    storageBucket: "mfmdb-9ddbc.appspot.com",
+	    messagingSenderId: "139543758499",
+	    appId: "1:139543758499:web:2e07b1628e5b7b201ca116",
+	    measurementId: "G-Z1JB032R2F"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+
+	  var database = firebase.database();
+	</script>
+	<body style="padding:30px">
+		<br>
+		<div id="addRecordModal" class="modal">
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <h2>Add Weight Record</h2>
+		      <a class="close" onclick="closeModal('addRecordModal')">&times;</a>
+		    </div>
+		    <div class="modal-body" id="addRecordModalBody">
+		    </div>
+		  </div>
+		</div>
+		<div id="actionButtons"></div>
+
+		<div id="loader" class="loader"></div>
+
+		<table id="realtime" class="display compact cell-border"></table>
+
+
+		<script type="text/javascript">
+			var peopleRef = database.ref('people');
+			var people;
+			let dataTable;
+
+			peopleRef.on("value", function(snapshot) {
+				people = snapshot.val();
+				console.log(people);
+				document.getElementById("loader").style.display = "none";
+				renderButtons();
+				refreshData();
+			})
+
+			function renderButtons() {
+				document.getElementById("actionButtons").innerHTML = "<div class='btn-group'><button class='btn btn-success' onclick='openAddRecordModal(\"addRecordModal\")'>Register Weight Record</button>";
+			}
+
+			function openAddRecordModal(modalId) {
+				var addRecordModalContent = "<form name='addNewForm'><table>";
+				addRecordModalContent += '<tr><td><b>Pick User</b></td><td>';
+				addRecordModalContent += '<select class="form-control" id="add' + "Name" + '"">';
+				Object.keys(people).forEach(o => addRecordModalContent += '<option value="' + o + '">' + o + '</option>');
+				addRecordModalContent += '</select></td></tr><tr><td><b>Set Date</b></td><td><input type="datetime-local" id="recordTime" name="recordTime"></td>';
+				addRecordModalContent += '<tr><td><b>Set Weight (in kg)</b></td><td><input class="form-control" type="text" name="addWeight">';
+
+				addRecordModalContent += '</table></form><button class="btn btn-primary btn-lg btn-block" onclick="saveNewRecord()">Save</button>'
+				document.getElementById('addRecordModalBody').innerHTML = addRecordModalContent;
+				document.getElementById(modalId).style.display = "block";
+			}
+
+			function saveNewRecord() {
+				var newRecord = {};
+				console.log(document.addNewForm['addName'].value);
+				// console.log(new Date(document.addNewForm['recordTime'].value).getTime());
+				// console.log(new Date().getTime());
+				// console.log(document.addNewForm['addWeight'].value);
+				var dateTime = document.addNewForm['recordTime'].value;
+				if(dateTime == '') {
+					dateTime = new Date().getTime();
+				} else {
+					dateTime = new Date(dateTime).getTime();
+				};
+
+				var newRecord = {
+					'weight': document.addNewForm['addWeight'].value,
+					'dateTime': dateTime,
+				}
+
+				console.log(newRecord);
+
+				var individualRef = peopleRef.child(document.addNewForm['addName'].value);
+				var pushRef = individualRef.push();
+				pushRef.set(newRecord);
+				closeModal('addRecordModal');
+
+			}
+
+			function closeModal(modalId) {
+				document.getElementById(modalId).style.display = "none";
+			}
+
+			function refreshData() {
+				if(dataTable) {
+					dataTable.destroy();
+				}
+
+				var dataColumns = [{title: "S/N"}].concat(Object.keys(people).map(function(c) {
+					return {
+						title: c
+					}
+				}))
+				console.log(dataColumns);
+
+				var tableData = [];
+				var numRows = 0;
+
+				for (const person in people) {
+					console.log(person);
+					if(Object.keys(people[person]).length > numRows) {
+						numRows = Object.keys(people[person]).length;
+					}
+				};
+
+				const sortedPeopleData = {};
+				Object.keys(people).map(function(p) {
+					var person = people[p];
+					sortedPeopleData[p] = Object.keys(person).map(function(key) {
+						var obj = person[key];
+						var myDate = new Date(obj.dateTime);
+						var dateStr = myDate.getFullYear() + "/" + (myDate.getMonth() + 1) + "/" + myDate.getDate() + " " + myDate.getHours();
+						return {
+							'weight': obj.weight,
+							'timeStamp': obj.dateTime,
+							'date': dateStr
+						}
+					}).sort((a,b) => b.timeStamp - a.timeStamp);
+				})
+
+				console.log(sortedPeopleData);
+
+				// {mike: [{}, {}, {}], ashley: [{}, {}]}
+
+				for (var i = 1; i <= numRows; i++) {
+					var tableDataRow = [];
+					tableDataRow.push(i);
+					for (const person in people) {
+						var record = sortedPeopleData[person][i-1];
+						tableDataRow.push(record? record.date + ': ' + record.weight + "kg" : "");
+					}
+					tableData.push(tableDataRow);
+				}
+
+				console.log(tableData);
+
+				dataTable = $('#realtime').DataTable({
+		          data: tableData,
+		          columns: dataColumns,
+		          scrollY: "800px",
+		          scrollCollapse: true
+		        });
+			}
+
+			// This stuff is commented out for use to manually load an inpout file. Inputs are added and will not affect existing data.
+
+			// d3.csv("./Drinks.csv", function(data) {
+			//   data.forEach(function(d) {
+			//   	var pushRef = recipeRef.push();
+			//   	var rawGarnishData = d["Garnish"].split(',');
+			//   	d["Garnish"] = [];
+			//   	rawGarnishData.forEach(function(g) {
+			//   		d["Garnish"].push({
+			//   			"Item": g.split(';')[0],
+			//   			"Quantity": g.split(';')[1]
+			//   		})
+			//   	})
+			//   	var rawIngredientsData = d["Ingredients"].split(',');
+			//   	d["Ingredients"] = [];
+			//   	rawIngredientsData.forEach(function(i) {
+			//   		d["Ingredients"].push({
+			//   			"Item": i.split(';')[0],
+			//   			"Quantity": i.split(';')[1]
+			//   		})
+			//   	})
+			//   	pushRef.set(d);
+			//   });
+			// });
+		</script>
+
+	</body>
+</html>
